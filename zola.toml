@@ -1,0 +1,67 @@
+title = "canxin121 blog"
+base_url = "http://localhost"
+description = "A static blog powered by Zola and Duckquill."
+author = "canxin121"
+
+theme = "duckquill"
+
+compile_sass = true
+minify_html = true
+generate_feeds = true
+feed_filenames = ["rss.xml", "atom.xml"]
+build_search_index = true
+
+taxonomies = [{ name = "tags", feed = true }]
+
+[markdown]
+render_emoji = true
+definition_list = true
+lazy_async_image = true
+insert_anchor_links = "left"
+external_links_external = true
+external_links_target_blank = true
+external_links_no_follow = true
+external_links_no_referrer = true
+external_links_class = "external"
+smart_punctuation = true
+bottom_footnotes = true
+github_alerts = true
+
+[markdown.highlighting]
+error_on_missing_language = false
+style = "inline"
+theme = "solarized-dark"
+
+[search]
+index_format = "fuse_json"
+
+[extra]
+default_theme = "dark"
+accent_color = "#ff7800"
+accent_color_dark = "#ffa348"
+show_copy_button = true
+show_reading_time = true
+show_share_button = true
+show_backlinks = true
+issues_url = "https://github.com/canxin121/duckquill-blog/issues"
+source_url = "https://github.com/canxin121/duckquill-blog"
+scripts = ["mermaid-init.js"]
+
+[extra.nav]
+show_feed = true
+show_theme_switcher = true
+show_repo = true
+links = [
+  { url = "@/blog/_index.md", name = "Blog" },
+  { url = "@/about.md", name = "About" }
+]
+
+[extra.footer]
+links = [
+  { url = "@/blog/_index.md", name = "Blog" },
+  { url = "@/about.md", name = "About" }
+]
+socials = []
+show_copyright = true
+show_powered_by = true
+show_source = true
