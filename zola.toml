@@ -58,7 +58,7 @@ issues_url = "https://github.com/canxin121/duckquill-blog/issues"
 source_url = "https://github.com/canxin121/duckquill-blog"
 favicon = "icons/favicon.png"
 apple_touch_icon = "icons/apple-touch-icon.png"
-styles = ["css/about-profile.css"]
+styles = ["css/about-profile.css", "css/friend-links.css"]
 scripts = ["js/mermaid-init.js"]
 
 [extra.nav]
@@ -66,7 +66,8 @@ show_feed = true
 show_theme_switcher = true
 show_repo = false
 links = [
-  { url = "@/blog/_index.md", name = "Blog" }
+  { url = "@/blog/_index.md", name = "Blog" },
+  { url = "@/friends/_index.md", name = "友链" }
 ]
 
 [extra.footer]

@@ -1,0 +1,71 @@
+.friend-links-grid {
+  list-style: none;
+  margin: 0.7rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem 0.85rem;
+}
+
+.friend-link-card {
+  margin: 0;
+  min-width: 0;
+}
+
+.friend-link-main {
+  display: grid;
+  grid-template-columns: 2.1rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  min-width: 0;
+}
+
+.friend-link-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.3rem;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.friend-link-meta {
+  display: grid;
+  gap: 0.12rem;
+  min-width: 0;
+}
+
+.friend-link-name {
+  display: block;
+  font-weight: 600;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.friend-link-desc {
+  display: block;
+  font-size: 0.88rem;
+  line-height: 1.25;
+  color: var(--fg-muted-5);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.friend-link-main:hover .friend-link-name {
+  text-decoration: underline;
+}
+
+@media (max-width: 52rem) {
+  .friend-links-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 34rem) {
+  .friend-links-grid {
+    grid-template-columns: 1fr;
+  }
+}
