@@ -3,10 +3,6 @@ title = "Friends"
 insert_anchor_links = "left"
 +++
 
-This page keeps a growing list of friend sites that I often visit.
-
-## Sites
-
 <ul class="friend-links-grid">
   <li class="friend-link-card">
     <a class="friend-link-main" href="https://www.eya46.com" rel="noopener nofollow noreferrer" target="_blank">
