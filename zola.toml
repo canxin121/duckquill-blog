@@ -59,7 +59,7 @@ source_url = "https://github.com/canxin121/duckquill-blog"
 favicon = "icons/favicon.png"
 apple_touch_icon = "icons/apple-touch-icon.png"
 styles = ["css/about-profile.css", "css/friend-links.css"]
-scripts = ["js/mermaid-init.js"]
+scripts = ["js/mermaid-init.js", "js/friend-site-meta.js"]
 
 [extra.nav]
 show_feed = true
