@@ -73,5 +73,6 @@ links = [
 links = []
 socials = []
 show_copyright = true
+copyright = "© canxin, 2026"
 show_powered_by = true
 show_source = true
