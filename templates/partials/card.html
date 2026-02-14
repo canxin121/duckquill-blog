@@ -1,0 +1,12 @@
+{%- if page.extra.card -%}
+	{{ get_url(path=page.colocated_path ~ page.extra.card) }}
+{%- elif section.extra.card -%}
+	{{ get_url(path=section.colocated_path ~ section.extra.card) }}
+{%- elif page.extra.banner -%}
+	{%- set card = resize_image(path=page.colocated_path ~ page.extra.banner, width=1200, height=628, op="fill") -%}
+	{{ card.url }}
+{%- elif config.extra.social_card is defined and config.extra.social_card -%}
+	{{ get_url(path=config.extra.social_card) }}
+{%- else -%}
+	{{ get_url(path="icons/favicon.png") }}
+{%- endif -%}
