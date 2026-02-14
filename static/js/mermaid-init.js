@@ -1,7 +1,9 @@
 (function () {
   const MERMAID_SELECTOR = "div.mermaid";
   const THEME_SWITCHER_SELECTOR = "#theme-switcher button";
-  const codeBlocks = document.querySelectorAll("pre code.language-mermaid");
+  const codeBlocks = document.querySelectorAll(
+    "pre code.language-mermaid, pre code[data-lang='mermaid'], pre code.lang-mermaid"
+  );
 
   codeBlocks.forEach((codeBlock) => {
     const source = codeBlock.textContent ? codeBlock.textContent.trim() : "";

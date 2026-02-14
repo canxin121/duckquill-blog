@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Feature Demo Figure</title>
+  <desc id="desc">Local image used to demonstrate figure and figcaption rendering.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff7800" />
+      <stop offset="100%" stop-color="#ffa348" />
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#bg)" />
+  <rect x="90" y="80" width="780" height="380" rx="24" fill="#121212" fill-opacity="0.18" stroke="#ffffff" stroke-opacity="0.6" stroke-width="3" />
+  <text x="480" y="250" text-anchor="middle" font-family="serif" font-size="54" fill="#ffffff">Duckquill Demo Figure</text>
+  <text x="480" y="305" text-anchor="middle" font-family="sans-serif" font-size="24" fill="#ffffff">local asset for stable rendering</text>
+</svg>
