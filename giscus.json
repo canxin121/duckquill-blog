@@ -1,6 +1,8 @@
 {
   "origins": [
-    "https://canxin121.github.io"
+    "https://canxin121.github.io",
+    "https://blog.cxits.cn",
+    "https://www.blog.cxits.cn"
   ],
   "originsRegex": [
     "http://localhost:[0-9]+",
