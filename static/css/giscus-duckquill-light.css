@@ -1,0 +1,213 @@
+/* Derived from giscus built-in themes; tuned to match Duckquill. */
+main {
+  --font-family-sans: "Inter Variable", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-family-default: var(--font-family-sans);
+
+  --color-fg-default: #2f2a24;
+  --color-fg-muted: #786d61;
+  --color-fg-subtle: #8a7f72;
+  --color-canvas-default: #fffdfa;
+  --color-canvas-overlay: #fffdf8;
+  --color-canvas-inset: #f4ede3;
+  --color-canvas-subtle: #f8f2e9;
+  --color-border-default: #d7c8b8;
+  --color-border-muted: #e2d7ca;
+  --color-neutral-muted: rgb(170 150 130 / 18%);
+
+  --color-accent-fg: #cb5c00;
+  --color-accent-emphasis: #cb5c00;
+  --color-accent-muted: rgb(222 133 57 / 38%);
+  --color-accent-subtle: #fff1df;
+
+  --color-success-fg: #2f7d32;
+  --color-attention-fg: #916204;
+  --color-attention-muted: rgb(195 150 35 / 34%);
+  --color-attention-subtle: #fff7d4;
+  --color-danger-fg: #c2352f;
+  --color-danger-muted: rgb(222 88 82 / 35%);
+  --color-danger-subtle: #ffe9e6;
+
+  --color-btn-text: #2f2a24;
+  --color-btn-bg: #f5ede4;
+  --color-btn-border: rgb(90 60 25 / 18%);
+  --color-btn-shadow: 0 1px 0 rgb(90 60 25 / 6%);
+  --color-btn-inset-shadow: inset 0 1px 0 rgb(255 255 255 / 28%);
+  --color-btn-hover-bg: #efe4d8;
+  --color-btn-hover-border: rgb(90 60 25 / 24%);
+  --color-btn-active-bg: #e7dccf;
+  --color-btn-active-border: rgb(90 60 25 / 26%);
+  --color-btn-selected-bg: #ece2d6;
+
+  --color-btn-primary-text: #fff;
+  --color-btn-primary-bg: #cb5c00;
+  --color-btn-primary-border: rgb(90 60 25 / 15%);
+  --color-btn-primary-shadow: 0 1px 0 rgb(90 60 25 / 12%);
+  --color-btn-primary-inset-shadow: inset 0 1px 0 rgb(255 255 255 / 15%);
+  --color-btn-primary-hover-bg: #b65000;
+  --color-btn-primary-hover-border: rgb(90 60 25 / 16%);
+  --color-btn-primary-selected-bg: #a44700;
+  --color-btn-primary-selected-shadow: inset 0 1px 0 rgb(60 28 0 / 18%);
+  --color-btn-primary-disabled-text: rgb(255 255 255 / 80%);
+  --color-btn-primary-disabled-bg: #e7b385;
+  --color-btn-primary-disabled-border: rgb(90 60 25 / 14%);
+
+  --color-action-list-item-default-hover-bg: rgb(170 150 130 / 18%);
+  --color-segmented-control-bg: #efe6db;
+  --color-segmented-control-button-bg: #fffaf3;
+  --color-segmented-control-button-selected-border: #c7b6a4;
+  --color-social-reaction-bg-hover: #f0e4d8;
+  --color-social-reaction-bg-reacted-hover: #ffe6c8;
+
+  line-height: 1.55;
+  padding-inline: 0.75rem;
+}
+
+main .gsc-main {
+  gap: 0.75rem;
+  padding: 0.25rem 0;
+}
+
+main .gsc-header {
+  padding: 0.25rem 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  align-items: center;
+}
+
+main .gsc-left-header {
+  gap: 0.5rem;
+}
+
+main .gsc-comments-count,
+main .gsc-comments-count-separator {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+main .BtnGroup {
+  padding: 0;
+  border: 1px solid var(--color-border-default);
+  border-radius: 0.75rem;
+  background: var(--color-canvas-subtle);
+  display: inline-flex;
+  overflow: hidden;
+  margin-left: auto;
+}
+
+main .BtnGroup-item,
+main .BtnGroup-item .btn,
+main .gsc-pagination-button,
+main .gsc-social-reaction-summary-item,
+main .gsc-reactions-button {
+  border-radius: 0;
+  border: none;
+}
+
+main .BtnGroup-item:first-child .btn {
+   border-radius: 0.75rem 0 0 0.75rem;
+}
+
+main .BtnGroup-item:last-child .btn {
+   border-radius: 0 0.75rem 0.75rem 0;
+}
+
+main .BtnGroup-item .btn {
+  min-width: 3rem;
+  padding-inline: 0.6rem;
+  font-weight: 500;
+  height: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+main .gsc-comment-box:not(.gsc-comment-box-is-reply) {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid var(--color-border-default);
+  background: var(--color-canvas-default);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+  margin-bottom: 0.75rem;
+}
+
+main .gsc-comment-box-tabs,
+main .gsc-comment-box-textarea-extras {
+  background: transparent;
+  border-bottom: 1px solid var(--color-border-muted);
+}
+
+main .gsc-comment-box-main {
+  margin: 0;
+}
+
+main .gsc-comment-box-textarea {
+  min-height: 100px;
+  border: none;
+  border-radius: 0;
+  padding: 0.6rem;
+  background: transparent;
+}
+
+main .gsc-comment-box-bottom {
+    padding: 0.4rem;
+}
+
+main .gsc-comment {
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+/* CRITICAL FIX: Target the main comment container div that has the border */
+/* Based on provided HTML: <div class="color-bg-primary ... rounded-md border ..."> */
+main .gsc-comment > div {
+  border-radius: 0.75rem !important; /* Force override rounded-md (6px) */
+  background-color: var(--color-canvas-overlay); /* Ensure distinct background */
+}
+
+/* Fix header padding */
+main .gsc-comment-header {
+    background: transparent;
+    border-radius: 0.75rem 0.75rem 0 0;
+    padding: 0.75rem 1rem 0.25rem 1rem; /* Top Right Bottom Left */
+    margin-bottom: 0;
+}
+
+/* Fix content padding and margins */
+main .gsc-comment-content {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 0.25rem 1rem 0.75rem 1rem; /* Top Right Bottom Left */
+  box-shadow: none;
+  margin-top: 0;
+}
+
+/* Fix footer padding */
+main .gsc-comment-footer {
+  padding: 0 1rem 0.75rem 1rem; /* Top Right Bottom Left */
+  margin-top: 0;
+}
+
+/* Replies styling */
+main .gsc-replies {
+  margin-top: 0.5rem;
+  border-left: 2px solid var(--color-border-muted);
+  padding-left: 1rem;
+}
+
+main .gsc-reply {
+  padding: 0.5rem 0;
+}
+
+main .gsc-tl-line {
+  left: 1.1rem;
+  border-left: 2px solid var(--color-border-muted);
+}
+
+/* Avatars in comment header */
+main .gsc-comment-author-avatar img {
+  border-radius: 0.5rem !important; /* Match rounded-corner-small */
+}

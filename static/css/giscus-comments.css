@@ -1,0 +1,18 @@
+#comments.giscus-comments {
+  margin-top: 1.8rem;
+}
+
+#comments.giscus-comments h2 {
+  margin-bottom: 0.7rem;
+}
+
+.giscus-frame {
+  width: 100%;
+}
+
+.giscus-unconfigured {
+  margin: 0;
+  color: var(--fg-muted-5);
+  font-size: 0.92rem;
+}
+

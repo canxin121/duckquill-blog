@@ -1,5 +1,5 @@
 title = "canxin's blog"
-base_url = "http://localhost"
+base_url = "https://canxin121.github.io/duckquill-blog"
 description = "canxin 的博客"
 author = "canxin"
 default_language = "zh-Hans"
@@ -59,13 +59,13 @@ source_url = "https://github.com/canxin121/duckquill-blog"
 favicon = "icons/favicon.png"
 apple_touch_icon = "icons/apple-touch-icon.png"
 social_card = "icons/favicon.png"
-styles = ["css/about-profile.css", "css/friend-links.css"]
-scripts = ["js/mermaid-init.js", "js/friend-site-meta.js"]
+styles = ["css/about-profile.css", "css/friend-links.css", "css/giscus-comments.css", "css/browser-warn-fixes.css"]
+scripts = ["js/mermaid-init.js", "js/friend-site-meta.js", "js/giscus-theme-sync.js"]
 
 [extra.nav]
 show_feed = true
 show_theme_switcher = true
-show_repo = false
+show_repo = true
 links = [
   { url = "@/blog/_index.md", name = "Blog" },
   { url = "@/friends/_index.md", name = "Friends" }
@@ -78,3 +78,20 @@ show_copyright = true
 copyright = "© canxin, 2026"
 show_powered_by = true
 show_source = true
+
+[extra.giscus]
+enabled = true
+host = "https://giscus.app"
+client_script = "js/giscus-client.js"
+repo = "canxin121/duckquill-blog"
+repo_id = "R_kgDORPmVfw"
+category = "Announcements"
+category_id = "DIC_kwDORPmVf84C2doH"
+mapping = "pathname"
+strict = "1"
+reactions_enabled = "0"
+emit_metadata = "1"
+input_position = "top"
+loading = "lazy"
+theme_light = "/css/giscus-duckquill-light.css"
+theme_dark = "/css/giscus-duckquill-dark.css"

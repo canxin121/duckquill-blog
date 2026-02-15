@@ -1,0 +1,4 @@
+:root {
+  /* Avoid requesting fingerprinting-blocked local heading fonts in strict browsers. */
+  --font-antique: ui-serif, serif;
+}
