@@ -82,7 +82,7 @@ show_source = true
 [extra.giscus]
 enabled = true
 host = "https://giscus.app"
-client_script = "js/giscus-client.js"
+client_script = "https://giscus.app/client.js"
 repo = "canxin121/duckquill-blog"
 repo_id = "R_kgDORPmVfw"
 category = "Announcements"
@@ -93,5 +93,5 @@ reactions_enabled = "0"
 emit_metadata = "1"
 input_position = "top"
 loading = "lazy"
-theme_light = "/css/giscus-duckquill-light.css"
-theme_dark = "/css/giscus-duckquill-dark.css"
+theme_light = "css/giscus-duckquill-light.css"
+theme_dark = "css/giscus-duckquill-dark.css"

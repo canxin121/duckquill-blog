@@ -4,13 +4,25 @@
   {%- set has_giscus_config = config.extra.giscus.repo and config.extra.giscus.repo_id and config.extra.giscus.category -%}
   {%- if has_giscus_config -%}
     {%- set giscus_host = config.extra.giscus.host | default(value="https://giscus.app") -%}
-    {%- if config.extra.giscus.client_script -%}
-      {%- set giscus_client_script = get_url(path=config.extra.giscus.client_script) -%}
+    {%- set raw_giscus_client_script = config.extra.giscus.client_script | default(value="https://giscus.app/client.js") -%}
+    {%- if raw_giscus_client_script is starting_with("https://") or raw_giscus_client_script is starting_with("http://") -%}
+      {%- set giscus_client_script = raw_giscus_client_script -%}
     {%- else -%}
-      {%- set giscus_client_script = get_url(path="js/giscus-client.js") -%}
+      {%- set giscus_client_script = get_url(path=raw_giscus_client_script) -%}
     {%- endif -%}
-    {%- set giscus_theme_light = config.extra.giscus.theme_light | default(value="/css/giscus-duckquill-light.css") -%}
-    {%- set giscus_theme_dark = config.extra.giscus.theme_dark | default(value="/css/giscus-duckquill-dark.css") -%}
+    {%- set raw_giscus_theme_light = config.extra.giscus.theme_light | default(value="css/giscus-duckquill-light.css") -%}
+    {%- if raw_giscus_theme_light is starting_with("https://") or raw_giscus_theme_light is starting_with("http://") -%}
+      {%- set giscus_theme_light = raw_giscus_theme_light -%}
+    {%- else -%}
+      {%- set giscus_theme_light = get_url(path=raw_giscus_theme_light) -%}
+    {%- endif -%}
+
+    {%- set raw_giscus_theme_dark = config.extra.giscus.theme_dark | default(value="css/giscus-duckquill-dark.css") -%}
+    {%- if raw_giscus_theme_dark is starting_with("https://") or raw_giscus_theme_dark is starting_with("http://") -%}
+      {%- set giscus_theme_dark = raw_giscus_theme_dark -%}
+    {%- else -%}
+      {%- set giscus_theme_dark = get_url(path=raw_giscus_theme_dark) -%}
+    {%- endif -%}
 
     {%- if config.extra.giscus.lang -%}
       {%- set giscus_lang = config.extra.giscus.lang -%}
