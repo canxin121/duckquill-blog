@@ -43,6 +43,7 @@ insert_anchor_links = "left"
 - [fzyzcjy/flutter_rust_bridge](https://github.com/fzyzcjy/flutter_rust_bridge)：Flutter/Dart 与 Rust 绑定生成器
 - [ryanheise/just_audio](https://github.com/ryanheise/just_audio)：Flutter 音频播放器项目
 - [openhwgroup/cva6](https://github.com/openhwgroup/cva6)：开源 RISC-V 应用级处理器内核项目
+- [router-for-me/CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI)：CLI 代理 API 项目
 
 ## 链接与联系
 

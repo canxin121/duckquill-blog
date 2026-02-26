@@ -43,6 +43,7 @@ insert_anchor_links = "left"
 - [fzyzcjy/flutter_rust_bridge](https://github.com/fzyzcjy/flutter_rust_bridge): Flutter/Dart ↔ Rust bindings generator
 - [ryanheise/just_audio](https://github.com/ryanheise/just_audio): Flutter audio player project
 - [openhwgroup/cva6](https://github.com/openhwgroup/cva6): open-source RISC-V application-class core project
+- [router-for-me/CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI): CLI proxy API project
 
 ## Links & Contact
 
