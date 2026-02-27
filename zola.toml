@@ -76,6 +76,10 @@ links = []
 socials = []
 show_copyright = true
 copyright = "© canxin, 2026"
+icp = "冀ICP备2026004655号-1"
+icp_url = "https://beian.miit.gov.cn/"
+public_security_record = "冀公网安备13062802000134号"
+public_security_url = "https://beian.mps.gov.cn/#/query/webSearch?code=13062802000134"
 show_powered_by = true
 show_source = true
 
