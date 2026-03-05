@@ -1,0 +1,1325 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "LocalReader": {
+      "description": "Read-first agent; asks for non-read actions",
+      "mode": "all",
+      "permission": {
+        "*": "ask",
+        "bash": "ask",
+        "codesearch": "allow",
+        "doom_loop": "ask",
+        "edit": "ask",
+        "external_directory": "ask",
+        "glob": "allow",
+        "grep": "allow",
+        "list": "allow",
+        "lsp": "allow",
+        "plan_enter": "deny",
+        "plan_exit": "deny",
+        "planpilot": "allow",
+        "question": "allow",
+        "read": {
+          "*": "allow",
+          "*.env": "allow",
+          "*.env.*": "allow"
+        },
+        "skill": "ask",
+        "task": "ask",
+        "todoread": "deny",
+        "todowrite": "deny",
+        "webfetch": "allow",
+        "websearch": "allow"
+      }
+    },
+    "LocalScribe": {
+      "description": "Reads any path; writes only inside workspace",
+      "mode": "all",
+      "permission": {
+        "*": "allow",
+        "bash": {
+          "*": "allow",
+          "dd *": "ask",
+          "doas *": "ask",
+          "mkfs* *": "ask",
+          "poweroff *": "ask",
+          "reboot *": "ask",
+          "rm -fr *": "ask",
+          "rm -rf *": "ask",
+          "shutdown *": "ask",
+          "su *": "ask",
+          "sudo *": "ask"
+        },
+        "codesearch": "allow",
+        "doom_loop": "ask",
+        "edit": {
+          "*": "allow",
+          "*../*": "deny"
+        },
+        "external_directory": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "list": "allow",
+        "lsp": "allow",
+        "plan_enter": "deny",
+        "plan_exit": "deny",
+        "planpilot": "allow",
+        "question": "allow",
+        "read": {
+          "*": "allow",
+          "*.env": "allow",
+          "*.env.*": "allow"
+        },
+        "skill": "allow",
+        "task": "allow",
+        "todoread": "deny",
+        "todowrite": "deny",
+        "webfetch": "allow",
+        "websearch": "allow"
+      }
+    },
+    "OmniReader": {
+      "description": "Read-first agent for all paths; asks for non-read actions",
+      "mode": "all",
+      "permission": {
+        "*": "ask",
+        "bash": "ask",
+        "codesearch": "allow",
+        "doom_loop": "ask",
+        "edit": "ask",
+        "external_directory": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "list": "allow",
+        "lsp": "allow",
+        "plan_enter": "deny",
+        "plan_exit": "deny",
+        "planpilot": "allow",
+        "question": "allow",
+        "read": {
+          "*": "allow",
+          "*.env": "allow",
+          "*.env.*": "allow"
+        },
+        "skill": "ask",
+        "task": "ask",
+        "todoread": "deny",
+        "todowrite": "deny",
+        "webfetch": "allow",
+        "websearch": "allow"
+      }
+    },
+    "OmniScribe": {
+      "description": "Dangerous full access read/write anywhere",
+      "mode": "all",
+      "permission": {
+        "*": "allow",
+        "bash": {
+          "*": "allow",
+          "dd *": "ask",
+          "doas *": "ask",
+          "mkfs* *": "ask",
+          "poweroff *": "ask",
+          "reboot *": "ask",
+          "rm -fr *": "ask",
+          "rm -rf *": "ask",
+          "shutdown *": "ask",
+          "su *": "ask",
+          "sudo *": "ask"
+        },
+        "doom_loop": "ask",
+        "external_directory": "allow",
+        "plan_enter": "deny",
+        "plan_exit": "deny",
+        "planpilot": "allow",
+        "todoread": "deny",
+        "todowrite": "deny"
+      }
+    },
+    "build": {
+      "disable": true
+    },
+    "docs": {
+      "disable": true
+    },
+    "plan": {
+      "disable": true
+    }
+  },
+  "autoupdate": false,
+  "compaction": {
+    "auto": true,
+    "prune": true
+  },
+  "default_agent": "LocalScribe",
+  "model": "my_oai/gpt-5.3-codex",
+  "plugin": [
+    "opencode-planpilot",
+    "opencode-workbench"
+  ],
+  "provider": {
+    "my_claude": {
+      "models": {
+        "claude-3-5-haiku-20241022": {
+          "attachment": true,
+          "limit": {
+            "context": 128000,
+            "output": 8192
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "claude-3-5-haiku-20241022",
+          "variants": {
+            "off": {
+              "thinking": {
+                "type": "disabled"
+              }
+            }
+          }
+        },
+        "claude-3-7-sonnet-20250219": {
+          "attachment": true,
+          "limit": {
+            "context": 128000,
+            "output": 8192
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "claude-3-7-sonnet-20250219",
+          "variants": {
+            "high": {
+              "thinking": {
+                "budgetTokens": 16000,
+                "type": "enabled"
+              }
+            },
+            "max": {
+              "thinking": {
+                "budgetTokens": 128000,
+                "type": "enabled"
+              }
+            },
+            "off": {
+              "thinking": {
+                "type": "disabled"
+              }
+            }
+          }
+        },
+        "claude-haiku-4-5-20251001": {
+          "attachment": true,
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "claude-haiku-4-5-20251001",
+          "variants": {
+            "high": {
+              "thinking": {
+                "budgetTokens": 16000,
+                "type": "enabled"
+              }
+            },
+            "max": {
+              "thinking": {
+                "budgetTokens": 128000,
+                "type": "enabled"
+              }
+            },
+            "off": {
+              "thinking": {
+                "type": "disabled"
+              }
+            }
+          }
+        },
+        "claude-opus-4-1-20250805": {
+          "attachment": true,
+          "limit": {
+            "context": 200000,
+            "output": 32000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "claude-opus-4-1-20250805",
+          "variants": {
+            "high": {
+              "thinking": {
+                "budgetTokens": 16000,
+                "type": "enabled"
+              }
+            },
+            "max": {
+              "thinking": {
+                "budgetTokens": 128000,
+                "type": "enabled"
+              }
+            },
+            "off": {
+              "thinking": {
+                "type": "disabled"
+              }
+            }
+          }
+        },
+        "claude-opus-4-20250514": {
+          "attachment": true,
+          "limit": {
+            "context": 200000,
+            "output": 32000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "claude-opus-4-20250514",
+          "variants": {
+            "high": {
+              "thinking": {
+                "budgetTokens": 16000,
+                "type": "enabled"
+              }
+            },
+            "max": {
+              "thinking": {
+                "budgetTokens": 128000,
+                "type": "enabled"
+              }
+            },
+            "off": {
+              "thinking": {
+                "type": "disabled"
+              }
+            }
+          }
+        },
+        "claude-opus-4-5-20251101": {
+          "attachment": true,
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "claude-opus-4-5-20251101",
+          "variants": {
+            "high": {
+              "thinking": {
+                "budgetTokens": 16000,
+                "type": "enabled"
+              }
+            },
+            "max": {
+              "thinking": {
+                "budgetTokens": 128000,
+                "type": "enabled"
+              }
+            },
+            "off": {
+              "thinking": {
+                "type": "disabled"
+              }
+            }
+          }
+        },
+        "claude-opus-4-6": {
+          "attachment": true,
+          "limit": {
+            "context": 1000000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "claude-opus-4-6",
+          "variants": {
+            "high": {
+              "thinking": {
+                "budgetTokens": 16000,
+                "type": "enabled"
+              }
+            },
+            "max": {
+              "thinking": {
+                "budgetTokens": 128000,
+                "type": "enabled"
+              }
+            },
+            "off": {
+              "thinking": {
+                "type": "disabled"
+              }
+            }
+          }
+        },
+        "claude-sonnet-4-20250514": {
+          "attachment": true,
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "claude-sonnet-4-20250514",
+          "variants": {
+            "high": {
+              "thinking": {
+                "budgetTokens": 16000,
+                "type": "enabled"
+              }
+            },
+            "max": {
+              "thinking": {
+                "budgetTokens": 128000,
+                "type": "enabled"
+              }
+            },
+            "off": {
+              "thinking": {
+                "type": "disabled"
+              }
+            }
+          }
+        },
+        "claude-sonnet-4-5-20250929": {
+          "attachment": true,
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "claude-sonnet-4-5-20250929",
+          "variants": {
+            "high": {
+              "thinking": {
+                "budgetTokens": 16000,
+                "type": "enabled"
+              }
+            },
+            "max": {
+              "thinking": {
+                "budgetTokens": 128000,
+                "type": "enabled"
+              }
+            },
+            "off": {
+              "thinking": {
+                "type": "disabled"
+              }
+            }
+          }
+        },
+        "gemini-claude-opus-4-5-thinking": {
+          "attachment": true,
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gemini-claude-opus-4-5-thinking",
+          "variants": {
+            "high": {
+              "thinking": {
+                "budgetTokens": 16000,
+                "type": "enabled"
+              }
+            },
+            "max": {
+              "thinking": {
+                "budgetTokens": 128000,
+                "type": "enabled"
+              }
+            },
+            "off": {
+              "thinking": {
+                "type": "disabled"
+              }
+            }
+          }
+        },
+        "gemini-claude-sonnet-4-5": {
+          "attachment": true,
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gemini-claude-sonnet-4-5",
+          "variants": {
+            "high": {
+              "thinking": {
+                "budgetTokens": 16000,
+                "type": "enabled"
+              }
+            },
+            "max": {
+              "thinking": {
+                "budgetTokens": 128000,
+                "type": "enabled"
+              }
+            },
+            "off": {
+              "thinking": {
+                "type": "disabled"
+              }
+            }
+          }
+        },
+        "gemini-claude-sonnet-4-5-thinking": {
+          "attachment": true,
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gemini-claude-sonnet-4-5-thinking",
+          "variants": {
+            "high": {
+              "thinking": {
+                "budgetTokens": 16000,
+                "type": "enabled"
+              }
+            },
+            "max": {
+              "thinking": {
+                "budgetTokens": 128000,
+                "type": "enabled"
+              }
+            },
+            "off": {
+              "thinking": {
+                "type": "disabled"
+              }
+            }
+          }
+        }
+      },
+      "name": "my_claude",
+      "npm": "@ai-sdk/anthropic",
+      "options": {
+        "apiKey": "{env:CLAUDE_API_KEY}",
+        "baseURL": "https://your-gateway.example/v1"
+      }
+    },
+    "my_gemini": {
+      "models": {
+        "gemini-2.5-flash": {
+          "attachment": true,
+          "limit": {
+            "context": 1048576,
+            "output": 65536
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "audio",
+              "video",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gemini-2.5-flash",
+          "variants": {
+            "high": {
+              "thinkingConfig": {
+                "includeThoughts": true,
+                "thinkingBudget": 16000
+              }
+            },
+            "max": {
+              "thinkingConfig": {
+                "includeThoughts": true,
+                "thinkingBudget": 24576
+              }
+            },
+            "off": {
+              "thinkingConfig": {
+                "thinkingBudget": 0
+              }
+            }
+          }
+        },
+        "gemini-2.5-flash-lite": {
+          "attachment": true,
+          "limit": {
+            "context": 1048576,
+            "output": 65536
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "audio",
+              "video",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gemini-2.5-flash-lite",
+          "variants": {
+            "high": {
+              "thinkingConfig": {
+                "includeThoughts": true,
+                "thinkingBudget": 16000
+              }
+            },
+            "max": {
+              "thinkingConfig": {
+                "includeThoughts": true,
+                "thinkingBudget": 24576
+              }
+            },
+            "off": {
+              "thinkingConfig": {
+                "thinkingBudget": 0
+              }
+            }
+          }
+        },
+        "gemini-2.5-pro": {
+          "attachment": true,
+          "limit": {
+            "context": 1048576,
+            "output": 65536
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "audio",
+              "video",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gemini-2.5-pro",
+          "variants": {
+            "high": {
+              "thinkingConfig": {
+                "includeThoughts": true,
+                "thinkingBudget": 16000
+              }
+            },
+            "max": {
+              "thinkingConfig": {
+                "includeThoughts": true,
+                "thinkingBudget": 32768
+              }
+            },
+            "off": {
+              "thinkingConfig": {
+                "thinkingBudget": 128
+              }
+            }
+          }
+        },
+        "gemini-3-flash-preview": {
+          "attachment": true,
+          "limit": {
+            "context": 1048576,
+            "output": 65536
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "video",
+              "audio",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gemini-3-flash-preview",
+          "variants": {
+            "high": {
+              "includeThoughts": true,
+              "thinkingLevel": "high"
+            },
+            "low": {
+              "includeThoughts": true,
+              "thinkingLevel": "low"
+            },
+            "off": {
+              "includeThoughts": false,
+              "thinkingLevel": "minimal"
+            }
+          }
+        },
+        "gemini-3-pro-image-preview": {
+          "attachment": true,
+          "limit": {
+            "context": 1048576,
+            "output": 65536
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gemini-3-pro-image-preview",
+          "variants": {
+            "high": {
+              "includeThoughts": true,
+              "thinkingLevel": "high"
+            },
+            "low": {
+              "includeThoughts": true,
+              "thinkingLevel": "low"
+            },
+            "off": {
+              "includeThoughts": false,
+              "thinkingLevel": "low"
+            }
+          }
+        },
+        "gemini-3-pro-preview": {
+          "attachment": true,
+          "limit": {
+            "context": 1048576,
+            "output": 65536
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "video",
+              "audio",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gemini-3-pro-preview",
+          "variants": {
+            "high": {
+              "includeThoughts": true,
+              "thinkingLevel": "high"
+            },
+            "low": {
+              "includeThoughts": true,
+              "thinkingLevel": "low"
+            },
+            "off": {
+              "includeThoughts": false,
+              "thinkingLevel": "low"
+            }
+          }
+        }
+      },
+      "name": "my_gemini",
+      "npm": "@ai-sdk/google",
+      "options": {
+        "apiKey": "{env:GEMINI_API_KEY}",
+        "baseURL": "https://your-gateway.example/v1beta"
+      }
+    },
+    "my_oai": {
+      "models": {
+        "gpt-5": {
+          "attachment": true,
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gpt-5",
+          "options": {
+            "include": [
+              "reasoning.encrypted_content"
+            ],
+            "store": false
+          },
+          "variants": {
+            "high": {
+              "reasoningEffort": "high",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "low": {
+              "reasoningEffort": "low",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "medium": {
+              "reasoningEffort": "medium",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "minimal": {
+              "reasoningEffort": "minimal",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            }
+          }
+        },
+        "gpt-5-codex": {
+          "attachment": false,
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gpt-5-codex",
+          "options": {
+            "include": [
+              "reasoning.encrypted_content"
+            ],
+            "store": false
+          },
+          "variants": {
+            "high": {
+              "reasoningEffort": "high",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "low": {
+              "reasoningEffort": "low",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "medium": {
+              "reasoningEffort": "medium",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            }
+          }
+        },
+        "gpt-5-codex-mini": {
+          "attachment": false,
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gpt-5-codex-mini",
+          "options": {
+            "include": [
+              "reasoning.encrypted_content"
+            ],
+            "store": false
+          },
+          "variants": {
+            "high": {
+              "reasoningEffort": "high",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "low": {
+              "reasoningEffort": "low",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "medium": {
+              "reasoningEffort": "medium",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            }
+          }
+        },
+        "gpt-5.1": {
+          "attachment": true,
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gpt-5.1",
+          "options": {
+            "include": [
+              "reasoning.encrypted_content"
+            ],
+            "store": false
+          },
+          "variants": {
+            "high": {
+              "reasoningEffort": "high",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "low": {
+              "reasoningEffort": "low",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "medium": {
+              "reasoningEffort": "medium",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "none": {
+              "reasoningEffort": "none",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            }
+          }
+        },
+        "gpt-5.1-codex": {
+          "attachment": true,
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gpt-5.1-codex",
+          "options": {
+            "include": [
+              "reasoning.encrypted_content"
+            ],
+            "store": false
+          },
+          "variants": {
+            "high": {
+              "reasoningEffort": "high",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "low": {
+              "reasoningEffort": "low",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "medium": {
+              "reasoningEffort": "medium",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            }
+          }
+        },
+        "gpt-5.1-codex-max": {
+          "attachment": true,
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gpt-5.1-codex-max",
+          "options": {
+            "include": [
+              "reasoning.encrypted_content"
+            ],
+            "store": false
+          },
+          "variants": {
+            "high": {
+              "reasoningEffort": "high",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "low": {
+              "reasoningEffort": "low",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "medium": {
+              "reasoningEffort": "medium",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "xhigh": {
+              "reasoningEffort": "xhigh",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            }
+          }
+        },
+        "gpt-5.1-codex-mini": {
+          "attachment": true,
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gpt-5.1-codex-mini",
+          "options": {
+            "include": [
+              "reasoning.encrypted_content"
+            ],
+            "store": false
+          },
+          "variants": {
+            "high": {
+              "reasoningEffort": "high",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "low": {
+              "reasoningEffort": "low",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "medium": {
+              "reasoningEffort": "medium",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            }
+          }
+        },
+        "gpt-5.2": {
+          "attachment": true,
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gpt-5.2",
+          "options": {
+            "include": [
+              "reasoning.encrypted_content"
+            ],
+            "store": false
+          },
+          "variants": {
+            "high": {
+              "reasoningEffort": "high",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "low": {
+              "reasoningEffort": "low",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "medium": {
+              "reasoningEffort": "medium",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "none": {
+              "reasoningEffort": "none",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "xhigh": {
+              "reasoningEffort": "xhigh",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            }
+          }
+        },
+        "gpt-5.2-codex": {
+          "attachment": true,
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gpt-5.2-codex",
+          "options": {
+            "include": [
+              "reasoning.encrypted_content"
+            ],
+            "store": false
+          },
+          "variants": {
+            "high": {
+              "reasoningEffort": "high",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "low": {
+              "reasoningEffort": "low",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "medium": {
+              "reasoningEffort": "medium",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "xhigh": {
+              "reasoningEffort": "xhigh",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            }
+          }
+        },
+        "gpt-5.3-codex": {
+          "attachment": true,
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gpt-5.3-codex",
+          "options": {
+            "include": [
+              "reasoning.encrypted_content"
+            ],
+            "store": false
+          },
+          "variants": {
+            "high": {
+              "reasoningEffort": "high",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "low": {
+              "reasoningEffort": "low",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "medium": {
+              "reasoningEffort": "medium",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "xhigh": {
+              "reasoningEffort": "xhigh",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            }
+          }
+        },
+        "gpt-5.3-codex-spark": {
+          "attachment": true,
+          "limit": {
+            "context": 128000,
+            "output": 32000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "gpt-5.3-codex-spark",
+          "options": {
+            "include": [
+              "reasoning.encrypted_content"
+            ],
+            "store": false
+          },
+          "variants": {
+            "high": {
+              "reasoningEffort": "high",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "low": {
+              "reasoningEffort": "low",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "medium": {
+              "reasoningEffort": "medium",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            },
+            "xhigh": {
+              "reasoningEffort": "xhigh",
+              "reasoningSummary": "auto",
+              "textVerbosity": "medium"
+            }
+          }
+        }
+      },
+      "name": "my_oai",
+      "npm": "@ai-sdk/openai",
+      "options": {
+        "apiKey": "{env:OAI_API_KEY}",
+        "baseURL": "https://your-gateway.example/v1",
+        "setCacheKey": true
+      }
+    }
+  },
+  "small_model": "my_oai/gpt-5.3-codex"
+}
