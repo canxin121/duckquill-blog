@@ -22,6 +22,54 @@ feed_filenames = ["rss.xml", "atom.xml"]
 build_search_index = true
 taxonomies = [{ name = "tags", feed = true }]
 
+[languages.hi]
+title = "canxin का ब्लॉग"
+description = "canxin का ब्लॉग।"
+generate_feeds = true
+feed_filenames = ["rss.xml", "atom.xml"]
+build_search_index = true
+taxonomies = [{ name = "tags", feed = true }]
+
+[languages.bn]
+title = "canxin-এর ব্লগ"
+description = "canxin-এর ব্লগ।"
+generate_feeds = true
+feed_filenames = ["rss.xml", "atom.xml"]
+build_search_index = true
+taxonomies = [{ name = "tags", feed = true }]
+
+[languages.pt]
+title = "blog do canxin"
+description = "Blog do canxin."
+generate_feeds = true
+feed_filenames = ["rss.xml", "atom.xml"]
+build_search_index = true
+taxonomies = [{ name = "tags", feed = true }]
+
+[languages.ur]
+title = "canxin کا بلاگ"
+description = "canxin کا بلاگ۔"
+generate_feeds = true
+feed_filenames = ["rss.xml", "atom.xml"]
+build_search_index = true
+taxonomies = [{ name = "tags", feed = true }]
+
+[languages.id]
+title = "blog canxin"
+description = "Blog canxin."
+generate_feeds = true
+feed_filenames = ["rss.xml", "atom.xml"]
+build_search_index = true
+taxonomies = [{ name = "tags", feed = true }]
+
+[languages.ja]
+title = "canxin のブログ"
+description = "canxin のブログ。"
+generate_feeds = true
+feed_filenames = ["rss.xml", "atom.xml"]
+build_search_index = true
+taxonomies = [{ name = "tags", feed = true }]
+
 [markdown]
 render_emoji = true
 definition_list = true

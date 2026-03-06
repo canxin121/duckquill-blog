@@ -27,6 +27,11 @@ Build output directory:
 
 Duckquill is added as a git submodule at `themes/duckquill`.
 
+## Newly added languages
+
+- Added language sections: `hi`, `bn`, `pt`, `ur`, `id`, `ja`.
+- Ordering rule: language blocks are ordered by broad usage among the newly added languages.
+
 ## Production config
 
 - Update `base_url` in `zola.toml` to your final domain before publishing.
