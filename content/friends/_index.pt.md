@@ -3,4 +3,114 @@ title = "Links amigos"
 insert_anchor_links = "left"
 +++
 
-Esta pagina esta sendo traduzida. Por enquanto, veja [中文 友链](@/friends/_index.md).
+<ul class="friend-links-grid">
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://www.eya46.com" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://www.google.com/s2/favicons?sz=128&domain_url=https://www.eya46.com" alt="icone do site eya46" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">Homepage pessoal da eya46</span>
+        <span class="friend-link-desc">Notas de estudo e projetos.</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://www.svcfusion.com" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://www.google.com/s2/favicons?sz=128&domain_url=https://www.svcfusion.com" alt="icone do site SVC Fusion" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">Documentacao SVC Fusion</span>
+        <span class="friend-link-desc">Guias e problemas comuns.</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://blog.rainiar.top" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://www.google.com/s2/favicons?sz=128&domain_url=https://blog.rainiar.top" alt="icone do blog Hanxia" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">Blog Hanxia</span>
+        <span class="friend-link-desc">Notas sobre Rust e frontend.</span>
+      </span>
+    </a>
+  </li>
+</ul>
+
+<div class="friend-meta-launcher">
+  <button class="friend-meta-open-btn" type="button" data-friend-meta-open>Informacoes do link do site</button>
+
+  <section class="friend-meta-modal" data-friend-meta-modal hidden role="dialog" aria-modal="true" aria-labelledby="friend-meta-title-pt">
+    <div class="friend-meta-header">
+      <p class="friend-meta-title" id="friend-meta-title-pt">Informacoes do link do site</p>
+      <div class="friend-meta-actions">
+        <button class="friend-meta-copy-all-btn" type="button" data-friend-copy-all data-copy-idle="Copiar tudo" data-copy-done="Tudo copiado" data-copy-fail="Falha ao copiar" aria-label="Copiar todas as informacoes" title="Copiar todas as informacoes">
+          <svg class="friend-copy-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M9 9h10v11H9z" />
+            <path d="M5 4h10v2" />
+            <path d="M5 4v11h2" />
+          </svg>
+        </button>
+        <button class="friend-meta-close-btn" type="button" data-friend-meta-close aria-label="Fechar" title="Fechar">
+          <svg class="friend-close-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M6 6l12 12" />
+            <path d="M18 6l-12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <ul class="friend-site-meta-list">
+      <li>
+        <strong>Nome</strong>
+        <span class="friend-meta-value" id="friend-meta-name-pt">blog de canxin</span>
+        <button class="friend-copy-btn" type="button" data-copy-target="friend-meta-name-pt" data-copy-idle="Copiar" data-copy-done="Copiado" data-copy-fail="Falha ao copiar" aria-label="Copiar nome" title="Copiar nome">
+          <svg class="friend-copy-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M9 9h10v11H9z" />
+            <path d="M5 4h10v2" />
+            <path d="M5 4v11h2" />
+          </svg>
+        </button>
+      </li>
+      <li>
+        <strong>Descricao</strong>
+        <span class="friend-meta-value" id="friend-meta-desc-pt">Notas sobre seguranca de hardware e pratica em frontend, backend, apps e Rust.</span>
+        <button class="friend-copy-btn" type="button" data-copy-target="friend-meta-desc-pt" data-copy-idle="Copiar" data-copy-done="Copiado" data-copy-fail="Falha ao copiar" aria-label="Copiar descricao" title="Copiar descricao">
+          <svg class="friend-copy-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M9 9h10v11H9z" />
+            <path d="M5 4h10v2" />
+            <path d="M5 4v11h2" />
+          </svg>
+        </button>
+      </li>
+      <li>
+        <strong>URL</strong>
+        <span class="friend-meta-value" id="friend-meta-url-pt" data-origin-template="{origin}/">https://YOUR-DOMAIN/</span>
+        <button class="friend-copy-btn" type="button" data-copy-target="friend-meta-url-pt" data-copy-idle="Copiar" data-copy-done="Copiado" data-copy-fail="Falha ao copiar" aria-label="Copiar URL" title="Copiar URL">
+          <svg class="friend-copy-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M9 9h10v11H9z" />
+            <path d="M5 4h10v2" />
+            <path d="M5 4v11h2" />
+          </svg>
+        </button>
+      </li>
+      <li>
+        <strong>Icone</strong>
+        <span class="friend-meta-value" id="friend-meta-icon-pt" data-origin-template="{origin}/icons/favicon.png">https://YOUR-DOMAIN/icons/favicon.png</span>
+        <button class="friend-copy-btn" type="button" data-copy-target="friend-meta-icon-pt" data-copy-idle="Copiar" data-copy-done="Copiado" data-copy-fail="Falha ao copiar" aria-label="Copiar URL do icone" title="Copiar URL do icone">
+          <svg class="friend-copy-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M9 9h10v11H9z" />
+            <path d="M5 4h10v2" />
+            <path d="M5 4v11h2" />
+          </svg>
+        </button>
+      </li>
+      <li>
+        <strong>RSS</strong>
+        <span class="friend-meta-value" id="friend-meta-rss-pt" data-origin-template="{origin}/rss.xml">https://YOUR-DOMAIN/rss.xml</span>
+        <button class="friend-copy-btn" type="button" data-copy-target="friend-meta-rss-pt" data-copy-idle="Copiar" data-copy-done="Copiado" data-copy-fail="Falha ao copiar" aria-label="Copiar URL do RSS" title="Copiar URL do RSS">
+          <svg class="friend-copy-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M9 9h10v11H9z" />
+            <path d="M5 4h10v2" />
+            <path d="M5 4v11h2" />
+          </svg>
+        </button>
+      </li>
+    </ul>
+  </section>
+</div>
