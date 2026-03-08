@@ -6,7 +6,7 @@ insert_anchor_links = "left"
 <ul class="friend-links-grid">
   <li class="friend-link-card">
     <a class="friend-link-main" href="https://www.eya46.com" rel="noopener nofollow noreferrer" target="_blank">
-      <img class="friend-link-icon" src="https://www.google.com/s2/favicons?sz=128&domain_url=https://www.eya46.com" alt="eya46 サイトアイコン" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <img class="friend-link-icon" src="https://q1.qlogo.cn/g?b=qq&nk=644310932&s=640" alt="eya46 サイトアイコン" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
       <span class="friend-link-meta">
         <span class="friend-link-name">eya46 個人ホームページ</span>
         <span class="friend-link-desc">学習ノートとプロジェクト。</span>
@@ -15,7 +15,7 @@ insert_anchor_links = "left"
   </li>
   <li class="friend-link-card">
     <a class="friend-link-main" href="https://www.svcfusion.com" rel="noopener nofollow noreferrer" target="_blank">
-      <img class="friend-link-icon" src="https://www.google.com/s2/favicons?sz=128&domain_url=https://www.svcfusion.com" alt="SVC Fusion サイトアイコン" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <img class="friend-link-icon" src="https://www.svcfusion.com/favicon.ico" alt="SVC Fusion サイトアイコン" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
       <span class="friend-link-meta">
         <span class="friend-link-name">SVC Fusion ドキュメント</span>
         <span class="friend-link-desc">ガイドとよくある問題。</span>
@@ -24,10 +24,55 @@ insert_anchor_links = "left"
   </li>
   <li class="friend-link-card">
     <a class="friend-link-main" href="https://blog.rainiar.top" rel="noopener nofollow noreferrer" target="_blank">
-      <img class="friend-link-icon" src="https://www.google.com/s2/favicons?sz=128&domain_url=https://blog.rainiar.top" alt="Hanxia ブログアイコン" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <img class="friend-link-icon" src="https://blog.rainiar.top/favicon.svg" alt="Hanxia ブログアイコン" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
       <span class="friend-link-meta">
         <span class="friend-link-name">Hanxia ブログ</span>
         <span class="friend-link-desc">Rust とフロントエンドのメモ。</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://blog.ksfu.top" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://blog.ksfu.top/images/redefine-favicon.svg" alt="康師傅ブログアイコン" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">康师傅</span>
+        <span class="friend-link-desc">技術と日常を記録する個人ブログ。</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://blog.lolicons.top" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://blog.lolicons.top/favicon.png" alt="Lolicons Blog アイコン" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">Lolicons Blog</span>
+        <span class="friend-link-desc">個人ブログ。</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://zhouym.tech/" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://zhouym.tech/img/favicon.png" alt="我只会摸鱼 アイコン" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">我只会摸鱼</span>
+        <span class="friend-link-desc">合間に更新している個人ブログ。</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://blog.lsy223622.com" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://blog.lsy223622.com/favicon.ico" alt="木生懒得写博客 アイコン" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">木生懒得写博客</span>
+        <span class="friend-link-desc">PC いじりの記録ブログ。</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://hhzm.win/" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://hhzm.win/avatar.png" alt="闪电豹猫的自留地 アバター" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">闪电豹猫的自留地</span>
+        <span class="friend-link-desc">個人ブログ。RSS: https://hhzm.win/rss.xml</span>
       </span>
     </a>
   </li>

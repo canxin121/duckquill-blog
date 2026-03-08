@@ -6,7 +6,7 @@ insert_anchor_links = "left"
 <ul class="friend-links-grid">
   <li class="friend-link-card">
     <a class="friend-link-main" href="https://www.eya46.com" rel="noopener nofollow noreferrer" target="_blank">
-      <img class="friend-link-icon" src="https://www.google.com/s2/favicons?sz=128&domain_url=https://www.eya46.com" alt="eya46 সাইট আইকন" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <img class="friend-link-icon" src="https://q1.qlogo.cn/g?b=qq&nk=644310932&s=640" alt="eya46 সাইট আইকন" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
       <span class="friend-link-meta">
         <span class="friend-link-name">eya46 ব্যক্তিগত হোমপেজ</span>
         <span class="friend-link-desc">শেখার নোট ও প্রকল্প।</span>
@@ -15,7 +15,7 @@ insert_anchor_links = "left"
   </li>
   <li class="friend-link-card">
     <a class="friend-link-main" href="https://www.svcfusion.com" rel="noopener nofollow noreferrer" target="_blank">
-      <img class="friend-link-icon" src="https://www.google.com/s2/favicons?sz=128&domain_url=https://www.svcfusion.com" alt="SVC Fusion সাইট আইকন" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <img class="friend-link-icon" src="https://www.svcfusion.com/favicon.ico" alt="SVC Fusion সাইট আইকন" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
       <span class="friend-link-meta">
         <span class="friend-link-name">SVC Fusion ডকস</span>
         <span class="friend-link-desc">গাইড ও সাধারণ সমস্যা।</span>
@@ -24,10 +24,55 @@ insert_anchor_links = "left"
   </li>
   <li class="friend-link-card">
     <a class="friend-link-main" href="https://blog.rainiar.top" rel="noopener nofollow noreferrer" target="_blank">
-      <img class="friend-link-icon" src="https://www.google.com/s2/favicons?sz=128&domain_url=https://blog.rainiar.top" alt="Hanxia ব্লগ আইকন" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <img class="friend-link-icon" src="https://blog.rainiar.top/favicon.svg" alt="Hanxia ব্লগ আইকন" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
       <span class="friend-link-meta">
         <span class="friend-link-name">Hanxia ব্লগ</span>
         <span class="friend-link-desc">Rust ও ফ্রন্টএন্ড নোট।</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://blog.ksfu.top" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://blog.ksfu.top/images/redefine-favicon.svg" alt="康师傅 ব্লগ আইকন" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">康师傅</span>
+        <span class="friend-link-desc">প্রযুক্তি ও জীবনের ব্যক্তিগত ব্লগ।</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://blog.lolicons.top" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://blog.lolicons.top/favicon.png" alt="Lolicons Blog আইকন" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">Lolicons Blog</span>
+        <span class="friend-link-desc">ব্যক্তিগত ব্লগ।</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://zhouym.tech/" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://zhouym.tech/img/favicon.png" alt="我只会摸鱼 আইকন" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">我只会摸鱼</span>
+        <span class="friend-link-desc">ফাঁকে ফাঁকে আপডেট হওয়া ব্যক্তিগত ব্লগ।</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://blog.lsy223622.com" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://blog.lsy223622.com/favicon.ico" alt="木生懒得写博客 আইকন" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">木生懒得写博客</span>
+        <span class="friend-link-desc">কম্পিউটার নিয়ে কাজকর্মের নোট।</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://hhzm.win/" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://hhzm.win/avatar.png" alt="闪电豹猫的自留地 অবতার" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">闪电豹猫的自留地</span>
+        <span class="friend-link-desc">এটি একটি ব্লগ। RSS: https://hhzm.win/rss.xml</span>
       </span>
     </a>
   </li>

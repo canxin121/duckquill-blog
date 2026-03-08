@@ -6,7 +6,7 @@ insert_anchor_links = "left"
 <ul class="friend-links-grid">
   <li class="friend-link-card">
     <a class="friend-link-main" href="https://www.eya46.com" rel="noopener nofollow noreferrer" target="_blank">
-      <img class="friend-link-icon" src="https://www.google.com/s2/favicons?sz=128&domain_url=https://www.eya46.com" alt="eya46 站点图标" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <img class="friend-link-icon" src="https://q1.qlogo.cn/g?b=qq&nk=644310932&s=640" alt="eya46 站点图标" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
       <span class="friend-link-meta">
         <span class="friend-link-name">eya46 个人学习主页</span>
         <span class="friend-link-desc">学习记录与项目主页。</span>
@@ -15,7 +15,7 @@ insert_anchor_links = "left"
   </li>
   <li class="friend-link-card">
     <a class="friend-link-main" href="https://www.svcfusion.com" rel="noopener nofollow noreferrer" target="_blank">
-      <img class="friend-link-icon" src="https://www.google.com/s2/favicons?sz=128&domain_url=https://www.svcfusion.com" alt="SVC Fusion 站点图标" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <img class="friend-link-icon" src="https://www.svcfusion.com/favicon.ico" alt="SVC Fusion 站点图标" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
       <span class="friend-link-meta">
         <span class="friend-link-name">SVC Fusion 文档站</span>
         <span class="friend-link-desc">使用流程与常见问题。</span>
@@ -24,10 +24,55 @@ insert_anchor_links = "left"
   </li>
   <li class="friend-link-card">
     <a class="friend-link-main" href="https://blog.rainiar.top" rel="noopener nofollow noreferrer" target="_blank">
-      <img class="friend-link-icon" src="https://www.google.com/s2/favicons?sz=128&domain_url=https://blog.rainiar.top" alt="寒夏摸鱼站图标" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <img class="friend-link-icon" src="https://blog.rainiar.top/favicon.svg" alt="寒夏摸鱼站图标" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
       <span class="friend-link-meta">
         <span class="friend-link-name">寒夏摸鱼站</span>
         <span class="friend-link-desc">技术博客，Rust 与前端。</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://blog.ksfu.top" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://blog.ksfu.top/images/redefine-favicon.svg" alt="康师傅博客图标" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">康师傅</span>
+        <span class="friend-link-desc">个人博客，记录技术与生活。</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://blog.lolicons.top" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://blog.lolicons.top/favicon.png" alt="Lolicons Blog 图标" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">Lolicons Blog</span>
+        <span class="friend-link-desc">个人博客。</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://zhouym.tech/" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://zhouym.tech/img/favicon.png" alt="我只会摸鱼图标" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">我只会摸鱼</span>
+        <span class="friend-link-desc">摸鱼之余，写写博客，欢迎来看看呀。</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://blog.lsy223622.com" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://blog.lsy223622.com/favicon.ico" alt="木生懒得写博客图标" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">木生懒得写博客</span>
+        <span class="friend-link-desc">写点玩电脑经历吧。</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://hhzm.win/" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://hhzm.win/avatar.png" alt="闪电豹猫的自留地头像" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">闪电豹猫的自留地</span>
+        <span class="friend-link-desc">是个博客，RSS: https://hhzm.win/rss.xml</span>
       </span>
     </a>
   </li>

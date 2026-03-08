@@ -6,7 +6,7 @@ insert_anchor_links = "left"
 <ul class="friend-links-grid">
   <li class="friend-link-card">
     <a class="friend-link-main" href="https://www.eya46.com" rel="noopener nofollow noreferrer" target="_blank">
-      <img class="friend-link-icon" src="https://www.google.com/s2/favicons?sz=128&domain_url=https://www.eya46.com" alt="eya46 site icon" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <img class="friend-link-icon" src="https://q1.qlogo.cn/g?b=qq&nk=644310932&s=640" alt="eya46 site icon" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
       <span class="friend-link-meta">
         <span class="friend-link-name">eya46 Personal Homepage</span>
         <span class="friend-link-desc">Learning notes and projects.</span>
@@ -15,7 +15,7 @@ insert_anchor_links = "left"
   </li>
   <li class="friend-link-card">
     <a class="friend-link-main" href="https://www.svcfusion.com" rel="noopener nofollow noreferrer" target="_blank">
-      <img class="friend-link-icon" src="https://www.google.com/s2/favicons?sz=128&domain_url=https://www.svcfusion.com" alt="SVC Fusion site icon" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <img class="friend-link-icon" src="https://www.svcfusion.com/favicon.ico" alt="SVC Fusion site icon" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
       <span class="friend-link-meta">
         <span class="friend-link-name">SVC Fusion Docs</span>
         <span class="friend-link-desc">Guides and common issues.</span>
@@ -24,10 +24,55 @@ insert_anchor_links = "left"
   </li>
   <li class="friend-link-card">
     <a class="friend-link-main" href="https://blog.rainiar.top" rel="noopener nofollow noreferrer" target="_blank">
-      <img class="friend-link-icon" src="https://www.google.com/s2/favicons?sz=128&domain_url=https://blog.rainiar.top" alt="Hanxia blog icon" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <img class="friend-link-icon" src="https://blog.rainiar.top/favicon.svg" alt="Hanxia blog icon" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
       <span class="friend-link-meta">
         <span class="friend-link-name">Hanxia Blog</span>
         <span class="friend-link-desc">Rust and frontend notes.</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://blog.ksfu.top" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://blog.ksfu.top/images/redefine-favicon.svg" alt="Kangshifu blog icon" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">Kangshifu</span>
+        <span class="friend-link-desc">Personal blog about tech and life.</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://blog.lolicons.top" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://blog.lolicons.top/favicon.png" alt="Lolicons Blog icon" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">Lolicons Blog</span>
+        <span class="friend-link-desc">Personal blog.</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://zhouym.tech/" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://zhouym.tech/img/favicon.png" alt="Zhouym blog icon" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">我只会摸鱼</span>
+        <span class="friend-link-desc">A casual blog updated during downtime.</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://blog.lsy223622.com" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://blog.lsy223622.com/favicon.ico" alt="Musheng blog icon" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">木生懒得写博客</span>
+        <span class="friend-link-desc">Notes about computer tinkering.</span>
+      </span>
+    </a>
+  </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://hhzm.win/" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://hhzm.win/avatar.png" alt="HHZM avatar" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">闪电豹猫的自留地</span>
+        <span class="friend-link-desc">A personal blog. RSS: https://hhzm.win/rss.xml</span>
       </span>
     </a>
   </li>

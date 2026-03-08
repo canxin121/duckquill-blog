@@ -35,7 +35,9 @@ insert_anchor_links = "left"
 
 - [app_rhyme](https://github.com/canxin121/app_rhyme)：Flutter + Rust 开源音乐软件
 - [oxidebot](https://github.com/canxin121/oxidebot)：Rust 方向的 Bot/框架实践项目
-- [opencode-planpilot](https://github.com/canxin121/opencode-planpilot)：OpenCode 计划与执行辅助工具
+- [opencode-studio](https://github.com/canxin121/opencode-studio)：功能丰富、高性能的 OpenCode 可视化工作台
+- [opencode-planpilot](https://github.com/canxin121/opencode-planpilot)：OpenCode 的 `plan -> step -> goal` 结构化计划与自动续跑插件
+- [opencode-workbench](https://github.com/canxin121/opencode-workbench)：基于 git worktree 的并发任务编排与路由插件
 
 ## 开源贡献
 

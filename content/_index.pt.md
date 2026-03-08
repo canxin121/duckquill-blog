@@ -35,7 +35,9 @@ insert_anchor_links = "left"
 
 - [app_rhyme](https://github.com/canxin121/app_rhyme): app de musica open source com Flutter + Rust
 - [oxidebot](https://github.com/canxin121/oxidebot): projeto de pratica de bot/framework orientado a Rust
-- [opencode-planpilot](https://github.com/canxin121/opencode-planpilot): assistente de planejamento e execucao para OpenCode
+- [opencode-studio](https://github.com/canxin121/opencode-studio): workspace visual para OpenCode, rico em recursos e de alto desempenho
+- [opencode-planpilot](https://github.com/canxin121/opencode-planpilot): plugin de planejamento estruturado `plan -> step -> goal` com auto-continue para OpenCode
+- [opencode-workbench](https://github.com/canxin121/opencode-workbench): plugin de orquestracao e roteamento de tarefas concorrentes baseado em git worktree
 
 ## Contribuicoes Open Source
 
