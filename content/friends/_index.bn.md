@@ -76,6 +76,15 @@ insert_anchor_links = "left"
       </span>
     </a>
   </li>
+  <li class="friend-link-card">
+    <a class="friend-link-main" href="https://aweip.com/" rel="noopener nofollow noreferrer" target="_blank">
+      <img class="friend-link-icon" src="https://aweip.com/usr/themes/Akina/images/favicon.ico" alt="AweiP Cache আইকন" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" />
+      <span class="friend-link-meta">
+        <span class="friend-link-name">AweiP Cache</span>
+        <span class="friend-link-desc">My Cache.</span>
+      </span>
+    </a>
+  </li>
 </ul>
 
 <div class="friend-meta-launcher">
