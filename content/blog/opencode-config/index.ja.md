@@ -2,7 +2,7 @@
 authors = ["canxin"]
 title = "OpenCode 設定共有：デフォルト Agent、プラグイン、Provider"
 description = "現在のグローバル設定を簡潔に整理: default_agent、モデルルーティング、プラグイン機能、provider ゲートウェイ構成。"
-date = 2026-03-06
+date = 2026-03-18
 slug = "my-opencode-setup"
 weight = 10
 [taxonomies]
@@ -24,7 +24,7 @@ go_to_top = true
     "auto": true,
     "prune": true
   },
-  "default_agent": "cx-omni",
+  "default_agent": "cx-local",
   "model": "openai/gpt-5.3-codex",
   "small_model": "openai/gpt-5.1-codex-mini",
   "plugin": [
@@ -78,20 +78,22 @@ OpenCode の優先順位（低 -> 高）:
 | `autoupdate` | `false` | 自動更新を無効化 | 安定運用向け |
 | `compaction.auto` | `true` | 長いセッションを自動圧縮 | 推奨 |
 | `compaction.prune` | `true` | 古いツール出力を剪定 | コンテキスト肥大を抑制 |
-| `default_agent` | `cx-omni` | 既定 agent | プラグイン提供 |
+| `default_agent` | `cx-local` | 既定 agent | プラグイン提供（0.2.0 以降推奨） |
 | `model` | `openai/gpt-5.3-codex` | 主モデル | メイン処理 |
 | `small_model` | `openai/gpt-5.1-codex-mini` | 軽量モデル | 補助処理 / コスト最適化 |
 | `plugin[]` | npm プラグイン 4 つ | 機能拡張 | マシン間再利用が容易 |
 | `provider.*.options` | `baseURL + apiKey` | 接続設定 | 環境変数を利用 |
 
-## 4. `default_agent = cx-omni` の由来
+## 4. `default_agent = cx-local` の由来
 
-`cx-omni` は `opencode-cx-agents` プラグインで登録される。ローカル設定に手書きの `agent` 定義は不要。
+`cx-local` は [`opencode-cx-agents`](https://github.com/canxin121/opencode-cx-agents) プラグインで登録される。ローカル設定に手書きの `agent` 定義は不要。
+
+現在の canonical agents は `cx-explore`、`cx-local`、`cx-global`。
 
 影響:
 
 1. グローバル設定を短く保てる。
-2. プラグイン読み込み失敗時は `cx-omni` が登録されない。
+2. プラグイン読み込み失敗時は既定 agent が登録されない。
 
 ## 5. プラグイン構成（重点）
 
@@ -106,7 +108,14 @@ OpenCode の優先順位（低 -> 高）:
 ]
 ```
 
-### 5.2 `opencode-planpilot`
+GitHub リポジトリ:
+
+- [`opencode-planpilot`](https://github.com/canxin121/opencode-planpilot)
+- [`opencode-workbench`](https://github.com/canxin121/opencode-workbench)
+- [`opencode-web-preview`](https://github.com/canxin121/opencode-web-preview)
+- [`opencode-cx-agents`](https://github.com/canxin121/opencode-cx-agents)
+
+### 5.2 [`opencode-planpilot`](https://github.com/canxin121/opencode-planpilot)
 
 **役割**：複雑タスクの構造化実行。  
 **主要機能**：
@@ -117,7 +126,7 @@ OpenCode の優先順位（低 -> 高）:
 
 **適用例**：段階的に進む長期タスクの進捗管理。
 
-### 5.3 `opencode-workbench`
+### 5.3 [`opencode-workbench`](https://github.com/canxin121/opencode-workbench)
 
 **役割**：branch/worktree ベースの並行編成。  
 **主要機能**：
@@ -128,7 +137,7 @@ OpenCode の優先順位（低 -> 高）:
 
 **適用例**：同一リポジトリでの並行開発。
 
-### 5.4 `opencode-web-preview`
+### 5.4 [`opencode-web-preview`](https://github.com/canxin121/opencode-web-preview)
 
 **役割**：ローカル front-end プレビュー管理。  
 **主要機能**：
@@ -139,15 +148,24 @@ OpenCode の優先順位（低 -> 高）:
 
 **適用例**：UI 変更の高速検証。
 
-### 5.5 `opencode-cx-agents`
+### 5.5 [`opencode-cx-agents`](https://github.com/canxin121/opencode-cx-agents)
 
-**役割**：`cx-omni` などの preset agent 提供。  
+**役割**：再利用可能な preset agent と権限ベースラインを提供。  
 **主要機能**：
 
-- 命名規約と挙動基準の統一
-- プロジェクトごとの重複定義を削減
+- canonical agents: `cx-explore`、`cx-local`、`cx-global`
+- 書き込み権限プロファイル:
+  - `cx-local`: ワークスペース優先、`external_directory: ask`
+  - `cx-global`: ディレクトリ横断書き込み、`external_directory: allow`
+- [`opencode-planpilot`](https://github.com/canxin121/opencode-planpilot)、[`opencode-workbench`](https://github.com/canxin121/opencode-workbench)、[`opencode-web-preview`](https://github.com/canxin121/opencode-web-preview) と併用してもツール可視性を維持
 
-**適用例**：複数リポジトリで同じ agent 方針を維持。
+**適用例**：複数リポジトリで統一した agent 方針を運用しつつ、リスクに応じて書き込み権限を選択。
+
+### 5.6 利用の推奨
+
+1. 既定値は `default_agent = cx-local` を推奨。
+2. ディレクトリ横断の自動書き込みが必要な場合のみ `cx-global` を使用。
+3. 起動後に `cx-explore / cx-local / cx-global` が見えていることを確認。
 
 ## 6. Provider とモデルルーティング
 

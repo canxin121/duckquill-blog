@@ -2,7 +2,7 @@
 authors = ["canxin"]
 title = "OpenCode Config Share: Default Agent, Plugins, and Providers"
 description = "A concise walkthrough of current global defaults: default agent, model routing, plugin capabilities, and provider gateway layout."
-date = 2026-03-06
+date = 2026-03-18
 slug = "my-opencode-setup"
 weight = 10
 [taxonomies]
@@ -24,7 +24,7 @@ go_to_top = true
     "auto": true,
     "prune": true
   },
-  "default_agent": "cx-omni",
+  "default_agent": "cx-local",
   "model": "openai/gpt-5.3-codex",
   "small_model": "openai/gpt-5.1-codex-mini",
   "plugin": [
@@ -78,20 +78,22 @@ Global config is best for durable defaults: `default_agent`, `model`, `small_mod
 | `autoupdate` | `false` | Disable auto-updates | Stability-first |
 | `compaction.auto` | `true` | Auto-compacts long sessions | Recommended |
 | `compaction.prune` | `true` | Prunes old tool output | Reduces context bloat |
-| `default_agent` | `cx-omni` | Default runtime agent | Provided by plugin |
+| `default_agent` | `cx-local` | Default runtime agent | Provided by plugin (recommended from 0.2.0) |
 | `model` | `openai/gpt-5.3-codex` | Primary model | Main path |
 | `small_model` | `openai/gpt-5.1-codex-mini` | Lightweight model | Helper path / cost control |
 | `plugin[]` | 4 npm plugins | Capability extensions | Easy cross-machine reuse |
 | `provider.*.options` | `baseURL + apiKey` | Provider connection settings | Uses environment variables |
 
-## 4. Where `default_agent = cx-omni` comes from
+## 4. Where `default_agent = cx-local` comes from
 
-`cx-omni` is registered by the `opencode-cx-agents` plugin, not hand-written in a local `agent` block.
+`cx-local` is registered by the [`opencode-cx-agents`](https://github.com/canxin121/opencode-cx-agents) plugin, not hand-written in a local `agent` block.
+
+The plugin currently exposes canonical agents: `cx-explore`, `cx-local`, and `cx-global`.
 
 Effects:
 
 1. Global config stays compact.
-2. If plugin loading fails, `cx-omni` is not registered.
+2. If plugin loading fails, the default agent is not registered.
 
 ## 5. Plugin stack (focus)
 
@@ -106,7 +108,14 @@ Effects:
 ]
 ```
 
-### 5.2 `opencode-planpilot`
+GitHub repositories:
+
+- [`opencode-planpilot`](https://github.com/canxin121/opencode-planpilot)
+- [`opencode-workbench`](https://github.com/canxin121/opencode-workbench)
+- [`opencode-web-preview`](https://github.com/canxin121/opencode-web-preview)
+- [`opencode-cx-agents`](https://github.com/canxin121/opencode-cx-agents)
+
+### 5.2 [`opencode-planpilot`](https://github.com/canxin121/opencode-planpilot)
 
 **Role**: structured execution for complex work.  
 **Core capabilities**:
@@ -117,7 +126,7 @@ Effects:
 
 **Typical use**: long multi-stage tasks that need clear progress tracking.
 
-### 5.3 `opencode-workbench`
+### 5.3 [`opencode-workbench`](https://github.com/canxin121/opencode-workbench)
 
 **Role**: parallel orchestration with branches/worktrees.  
 **Core capabilities**:
@@ -128,7 +137,7 @@ Effects:
 
 **Typical use**: concurrent tasks in the same repository.
 
-### 5.4 `opencode-web-preview`
+### 5.4 [`opencode-web-preview`](https://github.com/canxin121/opencode-web-preview)
 
 **Role**: local frontend preview session management.  
 **Core capabilities**:
@@ -139,15 +148,24 @@ Effects:
 
 **Typical use**: quick UI verification loops.
 
-### 5.5 `opencode-cx-agents`
+### 5.5 [`opencode-cx-agents`](https://github.com/canxin121/opencode-cx-agents)
 
-**Role**: provides preset agents (including `cx-omni`).  
+**Role**: provides reusable preset agents and permission baselines.  
 **Core capabilities**:
 
-- unified naming and behavior baseline
-- reduced per-project agent boilerplate
+- canonical agents: `cx-explore`, `cx-local`, `cx-global`
+- write permission tiers:
+  - `cx-local`: workspace-first, `external_directory: ask`
+  - `cx-global`: cross-directory writes, `external_directory: allow`
+- works alongside [`opencode-planpilot`](https://github.com/canxin121/opencode-planpilot), [`opencode-workbench`](https://github.com/canxin121/opencode-workbench), and [`opencode-web-preview`](https://github.com/canxin121/opencode-web-preview) while keeping tool visibility
 
-**Typical use**: consistent agent strategy across repositories.
+**Typical use**: consistent agent strategy across repositories with risk-based write defaults.
+
+### 5.6 Usage suggestions
+
+1. Use `default_agent = cx-local` as the safe default.
+2. Switch to `cx-global` only when cross-directory writes are explicitly needed.
+3. After startup, verify that `cx-explore / cx-local / cx-global` are visible.
 
 ## 6. Provider and model routing
 

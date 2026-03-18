@@ -2,7 +2,7 @@
 authors = ["canxin"]
 title = "Berbagi Konfigurasi OpenCode: Default Agent, Plugin, dan Provider"
 description = "Ringkasan konfigurasi global saat ini: default_agent, routing model, kapabilitas plugin, dan susunan gateway provider."
-date = 2026-03-06
+date = 2026-03-18
 slug = "my-opencode-setup"
 weight = 10
 [taxonomies]
@@ -24,7 +24,7 @@ go_to_top = true
     "auto": true,
     "prune": true
   },
-  "default_agent": "cx-omni",
+  "default_agent": "cx-local",
   "model": "openai/gpt-5.3-codex",
   "small_model": "openai/gpt-5.1-codex-mini",
   "plugin": [
@@ -78,20 +78,22 @@ Layer global cocok untuk default jangka panjang: `default_agent`, `model`, `smal
 | `autoupdate` | `false` | Menonaktifkan update otomatis | Cocok untuk stabilitas |
 | `compaction.auto` | `true` | Kompresi otomatis sesi panjang | Direkomendasikan |
 | `compaction.prune` | `true` | Memangkas output tool lama | Mengurangi bloat konteks |
-| `default_agent` | `cx-omni` | Agent default | Disediakan plugin |
+| `default_agent` | `cx-local` | Agent default | Disediakan plugin (direkomendasikan sejak 0.2.0) |
 | `model` | `openai/gpt-5.3-codex` | Model utama | Jalur utama |
 | `small_model` | `openai/gpt-5.1-codex-mini` | Model ringan | Jalur bantu / biaya |
 | `plugin[]` | 4 plugin npm | Ekstensi kemampuan | Mudah dipakai lintas mesin |
 | `provider.*.options` | `baseURL + apiKey` | Parameter koneksi provider | Pakai env var |
 
-## 4. Sumber `default_agent = cx-omni`
+## 4. Sumber `default_agent = cx-local`
 
-`cx-omni` diregistrasikan oleh plugin `opencode-cx-agents`, bukan ditulis manual dalam blok `agent` lokal.
+`cx-local` diregistrasikan oleh plugin [`opencode-cx-agents`](https://github.com/canxin121/opencode-cx-agents), bukan ditulis manual dalam blok `agent` lokal.
+
+Plugin ini saat ini menyediakan canonical agents: `cx-explore`, `cx-local`, `cx-global`.
 
 Dampak:
 
 1. Konfigurasi global lebih ringkas.
-2. Jika plugin gagal dimuat, `cx-omni` tidak terdaftar.
+2. Jika plugin gagal dimuat, agent default tidak terdaftar.
 
 ## 5. Susunan plugin (fokus)
 
@@ -106,7 +108,14 @@ Dampak:
 ]
 ```
 
-### 5.2 `opencode-planpilot`
+Repositori GitHub:
+
+- [`opencode-planpilot`](https://github.com/canxin121/opencode-planpilot)
+- [`opencode-workbench`](https://github.com/canxin121/opencode-workbench)
+- [`opencode-web-preview`](https://github.com/canxin121/opencode-web-preview)
+- [`opencode-cx-agents`](https://github.com/canxin121/opencode-cx-agents)
+
+### 5.2 [`opencode-planpilot`](https://github.com/canxin121/opencode-planpilot)
 
 **Peran**: eksekusi terstruktur untuk tugas kompleks.  
 **Kemampuan inti**:
@@ -117,7 +126,7 @@ Dampak:
 
 **Cocok untuk**: pekerjaan bertahap dengan kebutuhan pelacakan progres.
 
-### 5.3 `opencode-workbench`
+### 5.3 [`opencode-workbench`](https://github.com/canxin121/opencode-workbench)
 
 **Peran**: orkestrasi paralel berbasis branch/worktree.  
 **Kemampuan inti**:
@@ -128,7 +137,7 @@ Dampak:
 
 **Cocok untuk**: menjalankan beberapa task paralel di repo yang sama.
 
-### 5.4 `opencode-web-preview`
+### 5.4 [`opencode-web-preview`](https://github.com/canxin121/opencode-web-preview)
 
 **Peran**: pengelolaan sesi preview frontend lokal.  
 **Kemampuan inti**:
@@ -139,15 +148,24 @@ Dampak:
 
 **Cocok untuk**: validasi cepat perubahan UI.
 
-### 5.5 `opencode-cx-agents`
+### 5.5 [`opencode-cx-agents`](https://github.com/canxin121/opencode-cx-agents)
 
-**Peran**: menyediakan preset agent (termasuk `cx-omni`).  
+**Peran**: menyediakan preset agent reusable dan baseline permission.  
 **Kemampuan inti**:
 
-- baseline penamaan dan perilaku agent yang konsisten
-- mengurangi duplikasi definisi agent per proyek
+- canonical agents: `cx-explore`, `cx-local`, `cx-global`
+- tier permission untuk menulis:
+  - `cx-local`: workspace-first, `external_directory: ask`
+  - `cx-global`: menulis lintas direktori, `external_directory: allow`
+- tetap kompatibel dengan [`opencode-planpilot`](https://github.com/canxin121/opencode-planpilot), [`opencode-workbench`](https://github.com/canxin121/opencode-workbench), dan [`opencode-web-preview`](https://github.com/canxin121/opencode-web-preview) sambil menjaga visibilitas tools
 
-**Cocok untuk**: menjaga strategi agent yang seragam lintas repository.
+**Cocok untuk**: strategi agent yang konsisten lintas repository dengan pilihan default write berbasis risiko.
+
+### 5.6 Saran penggunaan
+
+1. Gunakan `default_agent = cx-local` sebagai default yang aman.
+2. Beralih ke `cx-global` hanya saat benar-benar perlu menulis lintas direktori.
+3. Setelah startup, pastikan `cx-explore / cx-local / cx-global` terlihat.
 
 ## 6. Provider dan routing model
 

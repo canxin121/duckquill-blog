@@ -2,7 +2,7 @@
 authors = ["canxin"]
 title = "OpenCode Config शेयर: Default Agent, Plugins और Provider"
 description = "मौजूदा global config का संक्षिप्त विवरण: default_agent, model routing, plugin capabilities और provider gateway संरचना।"
-date = 2026-03-06
+date = 2026-03-18
 slug = "my-opencode-setup"
 weight = 10
 [taxonomies]
@@ -24,7 +24,7 @@ go_to_top = true
     "auto": true,
     "prune": true
   },
-  "default_agent": "cx-omni",
+  "default_agent": "cx-local",
   "model": "openai/gpt-5.3-codex",
   "small_model": "openai/gpt-5.1-codex-mini",
   "plugin": [
@@ -78,20 +78,22 @@ Global layer long-term defaults के लिए उपयुक्त है: `
 | `autoupdate` | `false` | Auto update बंद | Stability-first workflow |
 | `compaction.auto` | `true` | लंबे sessions auto compact | Recommended |
 | `compaction.prune` | `true` | पुराने tool output prune | Context bloat कम करता है |
-| `default_agent` | `cx-omni` | Default agent | Plugin द्वारा उपलब्ध |
+| `default_agent` | `cx-local` | Default agent | Plugin द्वारा उपलब्ध (0.2.0 से recommended) |
 | `model` | `openai/gpt-5.3-codex` | Main model | Primary path |
 | `small_model` | `openai/gpt-5.1-codex-mini` | Lightweight model | Helper path / cost |
 | `plugin[]` | 4 npm plugins | Capability extension | Cross-machine reuse आसान |
 | `provider.*.options` | `baseURL + apiKey` | Provider connection settings | Environment variables उपयोग |
 
-## 4. `default_agent = cx-omni` का स्रोत
+## 4. `default_agent = cx-local` का स्रोत
 
-`cx-omni` को `opencode-cx-agents` plugin register करता है; local config में manual `agent` block की जरूरत नहीं होती।
+`cx-local` को [`opencode-cx-agents`](https://github.com/canxin121/opencode-cx-agents) plugin register करता है; local config में manual `agent` block की जरूरत नहीं होती।
+
+यह plugin canonical agents देता है: `cx-explore`, `cx-local`, `cx-global`।
 
 प्रभाव:
 
 1. Global config compact रहती है।
-2. Plugin load fail होने पर `cx-omni` register नहीं होता।
+2. Plugin load fail होने पर default agent register नहीं होता।
 
 ## 5. Plugin stack (मुख्य भाग)
 
@@ -106,7 +108,14 @@ Global layer long-term defaults के लिए उपयुक्त है: `
 ]
 ```
 
-### 5.2 `opencode-planpilot`
+GitHub repositories:
+
+- [`opencode-planpilot`](https://github.com/canxin121/opencode-planpilot)
+- [`opencode-workbench`](https://github.com/canxin121/opencode-workbench)
+- [`opencode-web-preview`](https://github.com/canxin121/opencode-web-preview)
+- [`opencode-cx-agents`](https://github.com/canxin121/opencode-cx-agents)
+
+### 5.2 [`opencode-planpilot`](https://github.com/canxin121/opencode-planpilot)
 
 **भूमिका**: complex tasks के लिए structured execution.  
 **Core capabilities**:
@@ -117,7 +126,7 @@ Global layer long-term defaults के लिए उपयुक्त है: `
 
 **उपयुक्त परिदृश्य**: multi-stage लंबे tasks जिनमें progress tracking जरूरी हो।
 
-### 5.3 `opencode-workbench`
+### 5.3 [`opencode-workbench`](https://github.com/canxin121/opencode-workbench)
 
 **भूमिका**: branch/worktree आधारित parallel orchestration.  
 **Core capabilities**:
@@ -128,7 +137,7 @@ Global layer long-term defaults के लिए उपयुक्त है: `
 
 **उपयुक्त परिदृश्य**: एक ही repo में parallel task execution.
 
-### 5.4 `opencode-web-preview`
+### 5.4 [`opencode-web-preview`](https://github.com/canxin121/opencode-web-preview)
 
 **भूमिका**: local frontend preview session management.  
 **Core capabilities**:
@@ -139,15 +148,24 @@ Global layer long-term defaults के लिए उपयुक्त है: `
 
 **उपयुक्त परिदृश्य**: UI changes की तेज validation.
 
-### 5.5 `opencode-cx-agents`
+### 5.5 [`opencode-cx-agents`](https://github.com/canxin121/opencode-cx-agents)
 
-**भूमिका**: preset agents देना (जैसे `cx-omni`)।  
+**भूमिका**: reusable preset agents और permission baseline प्रदान करना।  
 **Core capabilities**:
 
-- naming और behavior baseline को unify करना
-- per-project agent boilerplate कम करना
+- canonical agents: `cx-explore`, `cx-local`, `cx-global`
+- write permission tiers:
+  - `cx-local`: workspace-first, `external_directory: ask`
+  - `cx-global`: cross-directory writes, `external_directory: allow`
+- [`opencode-planpilot`](https://github.com/canxin121/opencode-planpilot), [`opencode-workbench`](https://github.com/canxin121/opencode-workbench), और [`opencode-web-preview`](https://github.com/canxin121/opencode-web-preview) के साथ compatible रहते हुए tool visibility बनाए रखना
 
-**उपयुक्त परिदृश्य**: multiple repos में consistent agent strategy रखना।
+**उपयुक्त परिदृश्य**: multiple repos में consistent agent strategy और risk-based write defaults रखना।
+
+### 5.6 उपयोग सुझाव
+
+1. safe default के रूप में `default_agent = cx-local` रखें।
+2. cross-directory auto-write की स्पष्ट जरूरत हो तभी `cx-global` चुनें।
+3. startup के बाद `cx-explore / cx-local / cx-global` visibility verify करें।
 
 ## 6. Provider और model routing
 
