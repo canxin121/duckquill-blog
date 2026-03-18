@@ -2,6 +2,7 @@
 authors = ["canxin"]
 title = "Compartilhamento de Config OpenCode: Agent Padrao, Plugins e Providers"
 description = "Resumo da configuracao global atual: default_agent, roteamento de modelos, capacidades de plugins e arquitetura de gateway de providers."
+date = 2026-03-06
 slug = "my-opencode-setup"
 weight = 10
 [taxonomies]

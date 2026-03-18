@@ -2,6 +2,7 @@
 authors = ["canxin"]
 title = "Berbagi Konfigurasi OpenCode: Default Agent, Plugin, dan Provider"
 description = "Ringkasan konfigurasi global saat ini: default_agent, routing model, kapabilitas plugin, dan susunan gateway provider."
+date = 2026-03-06
 slug = "my-opencode-setup"
 weight = 10
 [taxonomies]

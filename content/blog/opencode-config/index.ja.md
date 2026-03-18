@@ -2,6 +2,7 @@
 authors = ["canxin"]
 title = "OpenCode 設定共有：デフォルト Agent、プラグイン、Provider"
 description = "現在のグローバル設定を簡潔に整理: default_agent、モデルルーティング、プラグイン機能、provider ゲートウェイ構成。"
+date = 2026-03-06
 slug = "my-opencode-setup"
 weight = 10
 [taxonomies]

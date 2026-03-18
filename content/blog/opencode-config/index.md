@@ -2,6 +2,7 @@
 authors = ["canxin"]
 title = "OpenCode 配置分享：默认 Agent、插件与 Provider"
 description = "围绕当前全局配置说明 default_agent、模型路由、插件能力与 provider 网关。"
+date = 2026-03-06
 slug = "my-opencode-setup"
 weight = 10
 [taxonomies]

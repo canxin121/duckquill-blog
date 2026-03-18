@@ -2,6 +2,7 @@
 authors = ["canxin"]
 title = "OpenCode Config शेयर: Default Agent, Plugins और Provider"
 description = "मौजूदा global config का संक्षिप्त विवरण: default_agent, model routing, plugin capabilities और provider gateway संरचना।"
+date = 2026-03-06
 slug = "my-opencode-setup"
 weight = 10
 [taxonomies]

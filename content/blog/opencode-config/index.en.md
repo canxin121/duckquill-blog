@@ -2,6 +2,7 @@
 authors = ["canxin"]
 title = "OpenCode Config Share: Default Agent, Plugins, and Providers"
 description = "A concise walkthrough of current global defaults: default agent, model routing, plugin capabilities, and provider gateway layout."
+date = 2026-03-06
 slug = "my-opencode-setup"
 weight = 10
 [taxonomies]
