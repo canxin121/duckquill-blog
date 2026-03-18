@@ -1,12 +1,11 @@
 +++
 authors = ["canxin"]
-title = "Compartilhando Config do OpenCode: Agentes em Camadas, Permissoes e Exemplo Completo"
-description = "Um compartilhamento pratico de configuracao do OpenCode cobrindo camadas de agentes, modelos de provider e uma configuracao completa de referencia."
-date = 2026-03-06
-updated = 2026-03-06
+title = "Compartilhamento de Config OpenCode: Agent Padrao, Plugins e Providers"
+description = "Resumo da configuracao global atual: default_agent, roteamento de modelos, capacidades de plugins e arquitetura de gateway de providers."
 slug = "my-opencode-setup"
+weight = 10
 [taxonomies]
-tags = ["opencode", "ai-coding", "agents", "permissions", "llm"]
+tags = ["opencode", "ai-coding", "agents", "config"]
 [extra]
 toc = true
 toc_inline = true
@@ -14,271 +13,147 @@ toc_ordered = true
 go_to_top = true
 +++
 
-## 1. Ordem de merge e precedencia
+## 1. Configuracao atual
 
-Precedencia (baixo -> alto):
-
-1. Remote `.well-known/opencode`
-2. Global `~/.config/opencode/opencode.json`
-3. `OPENCODE_CONFIG`
-4. Project `opencode.json`
-5. Diretorios `.opencode`
-6. `OPENCODE_CONFIG_CONTENT`
-
-Recomendacao: mantenha defaults duraveis no global; mantenha regras especificas por repositorio.
-
-## 2. Campos de configuracao no topo
-
-Campos principais de nivel superior:
-
-```json
+```jsonc
 {
   "$schema": "https://opencode.ai/config.json",
-  "default_agent": "LocalScribe",
-  "model": "my_oai/gpt-5.3-codex",
-  "small_model": "my_oai/gpt-5.3-codex",
   "autoupdate": false,
   "compaction": {
     "auto": true,
     "prune": true
   },
-  "agent": { ... },
-  "plugin": [ ... ],
-  "provider": { ... }
-}
-```
-
-Notas de campo:
-
-- `"$schema"`: validacao e autocomplete no editor.
-- `default_agent`: padrao estavel do dia a dia (`LocalScribe`).
-- `model` e `small_model`: mesmo modelo para consistencia de comportamento.
-- `autoupdate = false`: ritmo de upgrade controlado.
-- `compaction.auto/prune`: mantem sessoes longas gerenciaveis.
-
-## 3. Design em camadas de agentes
-
-Limites reais com base nos valores atuais de `permission` (tabela unica):
-
-| Agente | `read` | `edit` | `external_directory` | `bash` | Conclusao |
-| :-- | :-- | :-- | :-- | :-- | :-- |
-| `LocalReader` | `read.* = allow` (inclui `*.env`) | `ask` | `ask` | `ask` | leitura direta no workspace; fora do workspace exige confirmacao |
-| `LocalScribe` | `read.* = allow` (inclui `*.env`) | `* = allow`, `*../* = deny` | `allow` | `* = allow`, padroes perigosos sao `ask` | leitura global; escrita tipicamente no workspace |
-| `OmniReader` | `read.* = allow` (inclui `*.env`) | `ask` | `allow` | `ask` | leitura global; escrita exige confirmacao |
-| `OmniScribe` | `* = allow` (inclui `read`) | `* = allow` | `allow` | `* = allow`, padroes perigosos sao `ask` | leitura/escrita global |
-
-`LocalScribe` e "tipicamente gravavel no workspace" porque traversal e bloqueado por `*../* = deny`. Para escrita estritamente dentro do workspace, ajuste `external_directory` para `ask` ou `deny`.
-
-Built-ins desativados:
-
-```json
-"agent": {
-  "build": { "disable": true },
-  "docs": { "disable": true },
-  "plan": { "disable": true }
-}
-```
-
-### 3.1 LocalReader
-
-```json
-"LocalReader": {
-  "description": "Read-first agent; asks for non-read actions",
-  "mode": "all",
-  "permission": {
-    "*": "ask",
-    "bash": "ask",
-    "edit": "ask",
-    "glob": "allow",
-    "grep": "allow",
-    "list": "allow",
-    "read": {
-      "*": "allow",
-      "*.env": "allow",
-      "*.env.*": "allow"
+  "default_agent": "cx-omni",
+  "model": "openai/gpt-5.3-codex",
+  "small_model": "openai/gpt-5.1-codex-mini",
+  "plugin": [
+    "opencode-planpilot",
+    "opencode-workbench",
+    "opencode-web-preview",
+    "opencode-cx-agents"
+  ],
+  "provider": {
+    "anthropic": {
+      "options": {
+        "apiKey": "{env:CLAUDE_API_KEY}",
+        "baseURL": "https://gateway.example.com/v1"
+      }
     },
-    "plan_enter": "deny",
-    "plan_exit": "deny",
-    "todoread": "deny",
-    "todowrite": "deny"
-  }
-}
-```
-
-### 3.2 LocalScribe (padrao)
-
-```json
-"LocalScribe": {
-  "description": "Reads any path; writes only inside workspace",
-  "mode": "all",
-  "permission": {
-    "*": "allow",
-    "bash": {
-      "*": "allow",
-      "sudo *": "ask",
-      "su *": "ask",
-      "rm -rf *": "ask",
-      "rm -fr *": "ask",
-      "mkfs* *": "ask",
-      "reboot *": "ask",
-      "shutdown *": "ask",
-      "dd *": "ask"
+    "google": {
+      "options": {
+        "apiKey": "{env:GEMINI_API_KEY}",
+        "baseURL": "https://gateway.example.com/v1beta"
+      }
     },
-    "edit": {
-      "*": "allow",
-      "*../*": "deny"
-    },
-    "external_directory": "allow",
-    "plan_enter": "deny",
-    "plan_exit": "deny",
-    "todoread": "deny",
-    "todowrite": "deny"
-  }
-}
-```
-
-### 3.3 OmniReader
-
-```json
-"OmniReader": {
-  "description": "Read-first agent for all paths; asks for non-read actions",
-  "mode": "all",
-  "permission": {
-    "*": "ask",
-    "external_directory": "allow",
-    "read": {
-      "*": "allow",
-      "*.env": "allow",
-      "*.env.*": "allow"
-    },
-    "bash": "ask",
-    "edit": "ask"
-  }
-}
-```
-
-### 3.4 OmniScribe
-
-```json
-"OmniScribe": {
-  "description": "Dangerous full access read/write anywhere",
-  "mode": "all",
-  "permission": {
-    "*": "allow",
-    "bash": {
-      "*": "allow",
-      "sudo *": "ask",
-      "rm -rf *": "ask",
-      "mkfs* *": "ask"
-    },
-    "external_directory": "allow",
-    "plan_enter": "deny",
-    "plan_exit": "deny"
-  }
-}
-```
-
-## 4. Estrutura de providers e catalogo de modelos
-
-Tres providers:
-
-- `my_claude` (`@ai-sdk/anthropic`)
-- `my_gemini` (`@ai-sdk/google`)
-- `my_oai` (`@ai-sdk/openai`)
-
-Estrutura de provider:
-
-1. metadados: `name`, `npm`
-2. opcoes de conexao: `options.baseURL`, `options.apiKey`, `options.setCacheKey`
-3. mapa `models`: um objeto por modelo
-
-### 4.1 Estrutura JSON comum de modelo
-
-```json
-"provider": {
-  "my_oai": {
-    "name": "my_oai",
-    "npm": "@ai-sdk/openai",
-    "options": {
-      "apiKey": "{env:OAI_API_KEY}",
-      "baseURL": "https://your-gateway.example/v1",
-      "setCacheKey": true
-    },
-    "models": {
-      "gpt-5.3-codex": {
-        "name": "gpt-5.3-codex",
-        "attachment": true,
-        "limit": {
-          "context": 400000,
-          "output": 128000
-        },
-        "modalities": {
-          "input": ["text", "image", "pdf"],
-          "output": ["text"]
-        },
-        "options": {
-          "store": false,
-          "include": ["reasoning.encrypted_content"]
-        },
-        "variants": {
-          "high": { "reasoningEffort": "high", "reasoningSummary": "auto", "textVerbosity": "medium" },
-          "medium": { "reasoningEffort": "medium", "reasoningSummary": "auto", "textVerbosity": "medium" },
-          "low": { "reasoningEffort": "low", "reasoningSummary": "auto", "textVerbosity": "medium" },
-          "xhigh": { "reasoningEffort": "xhigh", "reasoningSummary": "auto", "textVerbosity": "medium" }
-        }
+    "openai": {
+      "options": {
+        "apiKey": "{env:OPENAI_API_KEY}",
+        "baseURL": "https://gateway.example.com/v1",
+        "setCacheKey": true
       }
     }
   }
 }
 ```
 
-### 4.2 Referencia de campos de modelo
+## 2. Precedencia de merge
 
-| Campo | Tipo | Significado |
-| :-- | :-- | :-- |
-| `name` | `string` | nome de exibicao |
-| `attachment` | `boolean` | se anexos estao habilitados |
-| `limit.context` | `number` | janela total de contexto |
-| `limit.output` | `number` | maximo de tokens de saida |
-| `modalities.input` | `string[]` | modalidades de entrada, ex.: `text/image/pdf` |
-| `modalities.output` | `string[]` | modalidades de saida, geralmente `text` |
-| `options.store` | `boolean` | toggle de armazenamento da requisicao |
-| `options.include` | `string[]` | campos extras retornados |
-| `variants` | `object` | perfis de raciocinio por modelo |
+Precedencia do OpenCode (baixo -> alto):
 
-## 5. Carregamento de plugins
+1. Remote `.well-known/opencode`
+2. Global `~/.config/opencode/opencode.json`
+3. `OPENCODE_CONFIG`
+4. Project `opencode.json`
+5. Diretorios `.opencode` (agents/commands/plugins)
+6. `OPENCODE_CONFIG_CONTENT`
 
-Configuracao de plugins:
+A camada global e ideal para defaults duraveis: `default_agent`, `model`, `small_model`, providers e plugins compartilhados.
+
+## 3. Campos top-level
+
+| Campo | Valor atual | Funcao | Nota |
+| :-- | :-- | :-- | :-- |
+| `$schema` | `https://opencode.ai/config.json` | Validacao JSON e autocomplete | Manter ativo |
+| `autoupdate` | `false` | Desliga atualizacao automatica | Fluxo orientado a estabilidade |
+| `compaction.auto` | `true` | Compacta sessoes longas automaticamente | Recomendado |
+| `compaction.prune` | `true` | Remove saida antiga de ferramentas | Reduz crescimento de contexto |
+| `default_agent` | `cx-omni` | Agent padrao | Fornecido por plugin |
+| `model` | `openai/gpt-5.3-codex` | Modelo principal | Caminho principal |
+| `small_model` | `openai/gpt-5.1-codex-mini` | Modelo leve | Caminho auxiliar / custo |
+| `plugin[]` | 4 plugins npm | Extensao de capacidades | Facil de reutilizar entre maquinas |
+| `provider.*.options` | `baseURL + apiKey` | Parametros de conexao | Usa variaveis de ambiente |
+
+## 4. Origem de `default_agent = cx-omni`
+
+`cx-omni` e registrado pelo plugin `opencode-cx-agents`, sem necessidade de bloco `agent` manual no arquivo local.
+
+Efeitos:
+
+1. Config global mais enxuta.
+2. Se o carregamento do plugin falhar, `cx-omni` nao e registrado.
+
+## 5. Stack de plugins (foco)
+
+### 5.1 Lista de plugins (nomes npm)
 
 ```json
 "plugin": [
   "opencode-planpilot",
-  "opencode-workbench"
+  "opencode-workbench",
+  "opencode-web-preview",
+  "opencode-cx-agents"
 ]
 ```
 
-### 5.1 opencode-planpilot (npm)
+### 5.2 `opencode-planpilot`
 
-- npm: [opencode-planpilot](https://www.npmjs.com/package/opencode-planpilot)
-- Descricao do pacote: `Planpilot plugin for OpenCode`
-- Capacidades principais:
-  - Quebra trabalhos complexos em `plan -> step -> goal`.
-  - Continua automaticamente quando o proximo passo pertence a `ai`.
-  - Persiste progresso localmente (banco + snapshot Markdown).
-  - Suporta fluxos disparados por linguagem natural (por exemplo, "use planpilot").
+**Papel**: execucao estruturada de tarefas complexas.  
+**Capacidades principais**:
 
-### 5.2 opencode-workbench (npm)
+- modelo unificado: `plan -> step -> goal`
+- separacao explicita de executor `ai / human`
+- auto-continue quando o proximo executor e `ai`
 
-- npm: [opencode-workbench](https://www.npmjs.com/package/opencode-workbench)
-- Descricao do pacote: `Branch sandboxes for parallel OpenCode development`
-- Capacidades principais:
-  - Mapeia `git worktree` para sessoes OpenCode com roteamento paralelo.
-  - Suporta orquestracao supervisor/worker para tarefas concorrentes.
-  - Rastreia metadados de branch, fork e PR para entrega multi-tarefa.
-  - Pinagem de versao opcional (por exemplo, `opencode-workbench@0.3.2`).
+**Uso tipico**: tarefas longas em multiplas etapas.
 
-## 6. Config completa (referencia)
+### 5.3 `opencode-workbench`
 
-Para evitar duplicacao enorme nesta versao localizada, recomendo usar o mesmo bloco JSONC completo da versao em ingles e manter apenas os textos explicativos traduzidos neste artigo.
+**Papel**: orquestracao paralela com branch/worktree.  
+**Capacidades principais**:
 
-Link direto: [English](@/blog/opencode-config/index.en.md)
+- vinculo explicito entre sessao e worktree
+- roteamento por worktree para paralelismo
+- rastreabilidade de contexto de branch/tarefa
+
+**Uso tipico**: multiplas frentes de trabalho no mesmo repositorio.
+
+### 5.4 `opencode-web-preview`
+
+**Papel**: gerenciamento de preview local de frontend.  
+**Capacidades principais**:
+
+- descoberta de sessoes de preview
+- start/stop de hosts de preview locais
+- verificacao de status de preview
+
+**Uso tipico**: validacao rapida de alteracoes de UI.
+
+### 5.5 `opencode-cx-agents`
+
+**Papel**: fornece agents predefinidos (incluindo `cx-omni`).  
+**Capacidades principais**:
+
+- baseline unificada de nomenclatura e comportamento
+- menos repeticao de definicoes por projeto
+
+**Uso tipico**: padronizar estrategia de agents entre repositorios.
+
+## 6. Providers e roteamento de modelo
+
+Layout atual: um dominio de gateway com rotas separadas por provider.
+
+| Provider | baseURL | Observacao |
+| :-- | :-- | :-- |
+| `anthropic` | `https://gateway.example.com/v1` | Rota compativel com Anthropic |
+| `google` | `https://gateway.example.com/v1beta` | Rota compativel com Gemini |
+| `openai` | `https://gateway.example.com/v1` | Rota compativel com OpenAI |

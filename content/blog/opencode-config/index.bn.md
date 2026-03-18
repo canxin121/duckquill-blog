@@ -1,12 +1,11 @@
 +++
 authors = ["canxin"]
-title = "OpenCode কনফিগ শেয়ার: লেয়ার্ড এজেন্ট, পারমিশন এবং পূর্ণ উদাহরণ"
-description = "OpenCode কনফিগের একটি বাস্তবমুখী শেয়ার, যেখানে agent layering, provider models এবং পূর্ণ উদাহরণ রয়েছে।"
-date = 2026-03-06
-updated = 2026-03-06
+title = "OpenCode Config শেয়ার: Default Agent, Plugin এবং Provider"
+description = "বর্তমান global config-এর সংক্ষিপ্ত বিশ্লেষণ: default_agent, model routing, plugin ক্ষমতা এবং provider gateway বিন্যাস।"
 slug = "my-opencode-setup"
+weight = 10
 [taxonomies]
-tags = ["opencode", "ai-coding", "agents", "permissions", "llm"]
+tags = ["opencode", "ai-coding", "agents", "config"]
 [extra]
 toc = true
 toc_inline = true
@@ -14,366 +13,147 @@ toc_ordered = true
 go_to_top = true
 +++
 
-## 1. মার্জ অর্ডার ও প্রাধান্য
+## 1. বর্তমান কনফিগারেশন
 
-প্রাধান্য (নিম্ন -> উচ্চ):
+```jsonc
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": false,
+  "compaction": {
+    "auto": true,
+    "prune": true
+  },
+  "default_agent": "cx-omni",
+  "model": "openai/gpt-5.3-codex",
+  "small_model": "openai/gpt-5.1-codex-mini",
+  "plugin": [
+    "opencode-planpilot",
+    "opencode-workbench",
+    "opencode-web-preview",
+    "opencode-cx-agents"
+  ],
+  "provider": {
+    "anthropic": {
+      "options": {
+        "apiKey": "{env:CLAUDE_API_KEY}",
+        "baseURL": "https://gateway.example.com/v1"
+      }
+    },
+    "google": {
+      "options": {
+        "apiKey": "{env:GEMINI_API_KEY}",
+        "baseURL": "https://gateway.example.com/v1beta"
+      }
+    },
+    "openai": {
+      "options": {
+        "apiKey": "{env:OPENAI_API_KEY}",
+        "baseURL": "https://gateway.example.com/v1",
+        "setCacheKey": true
+      }
+    }
+  }
+}
+```
+
+## 2. Merge precedence
+
+OpenCode precedence (low -> high):
 
 1. Remote `.well-known/opencode`
 2. Global `~/.config/opencode/opencode.json`
 3. `OPENCODE_CONFIG`
 4. Project `opencode.json`
-5. `.opencode` directories
+5. `.opencode` directories (agents/commands/plugins)
 6. `OPENCODE_CONFIG_CONTENT`
 
-প্রস্তাবনা: টেকসই ডিফল্ট global-এ রাখুন; repo-নির্দিষ্ট নিয়ম সংশ্লিষ্ট repository-তে রাখুন।
+Global layer দীর্ঘমেয়াদি defaults রাখার জন্য উপযুক্ত: `default_agent`, `model`, `small_model`, shared providers এবং shared plugins।
 
-## 2. টপ-লেভেল কনফিগ ফিল্ড
+## 3. Top-level fields
 
-টপ-লেভেলের প্রধান ফিল্ডগুলো:
+| Field | Current value | ভূমিকা | নোট |
+| :-- | :-- | :-- | :-- |
+| `$schema` | `https://opencode.ai/config.json` | JSON validation + autocomplete | রাখা উচিত |
+| `autoupdate` | `false` | Auto update বন্ধ | Stability-first workflow |
+| `compaction.auto` | `true` | দীর্ঘ session auto compact | Recommended |
+| `compaction.prune` | `true` | পুরনো tool output prune | Context bloat কমায় |
+| `default_agent` | `cx-omni` | Default agent | Plugin দ্বারা সরবরাহিত |
+| `model` | `openai/gpt-5.3-codex` | Main model | Primary path |
+| `small_model` | `openai/gpt-5.1-codex-mini` | Lightweight model | Helper path / কম খরচ |
+| `plugin[]` | 4 npm plugins | Capability extension | Cross-machine reuse সহজ |
+| `provider.*.options` | `baseURL + apiKey` | Provider connection settings | Environment variables ব্যবহার |
 
-```json
-{
-  "$schema": "https://opencode.ai/config.json",
-  "default_agent": "LocalScribe",
-  "model": "my_oai/gpt-5.3-codex",
-  "small_model": "my_oai/gpt-5.3-codex",
-  "autoupdate": false,
-  "compaction": {
-    "auto": true,
-    "prune": true
-  },
-  "agent": { ... },
-  "plugin": [ ... ],
-  "provider": { ... }
-}
-```
+## 4. `default_agent = cx-omni` এর উৎস
 
-ফিল্ড নোট:
+`cx-omni` নিবন্ধিত হয় `opencode-cx-agents` plugin দিয়ে; local config-এ manual `agent` block প্রয়োজন হয় না।
 
-- `"$schema"`: এডিটরে validation ও autocomplete.
-- `default_agent`: দৈনন্দিন ব্যবহারের স্থিতিশীল ডিফল্ট (`LocalScribe`).
-- `model` এবং `small_model`: আচরণে সামঞ্জস্য রাখতে একই মডেল।
-- `autoupdate = false`: নিয়ন্ত্রিত আপগ্রেড চক্র।
-- `compaction.auto/prune`: দীর্ঘ সেশনকে ব্যবস্থাপনাযোগ্য রাখে।
+প্রভাব:
 
-## 3. লেয়ার্ড এজেন্ট ডিজাইন
+1. Global config compact থাকে।
+2. Plugin load ব্যর্থ হলে `cx-omni` register হয় না।
 
-বর্তমান `permission` মান অনুযায়ী বাস্তব সীমানা (একটি টেবিলে):
+## 5. Plugin stack (মূল অংশ)
 
-| Agent | `read` | `edit` | `external_directory` | `bash` | উপসংহার |
-| :-- | :-- | :-- | :-- | :-- | :-- |
-| `LocalReader` | `read.* = allow` (যার মধ্যে `*.env`) | `ask` | `ask` | `ask` | workspace সরাসরি পড়তে পারে; workspace-এর বাইরে অ্যাক্সেসে নিশ্চিতকরণ দরকার |
-| `LocalScribe` | `read.* = allow` (যার মধ্যে `*.env`) | `* = allow`, `*../* = deny` | `allow` | `* = allow`, ঝুঁকিপূর্ণ pattern `ask` | গ্লোবাল রিড অনুমতি; সাধারণত workspace-এ writable |
-| `OmniReader` | `read.* = allow` (যার মধ্যে `*.env`) | `ask` | `allow` | `ask` | গ্লোবাল রিড; লিখতে নিশ্চিতকরণ দরকার |
-| `OmniScribe` | `* = allow` (যার মধ্যে `read`) | `* = allow` | `allow` | `* = allow`, ঝুঁকিপূর্ণ pattern `ask` | গ্লোবাল read/write |
-
-`LocalScribe`-কে “সাধারণত workspace writable” বলা হয় কারণ path traversal `*../* = deny` দিয়ে ব্লক করা। কঠোর workspace-only write চাইলে `external_directory`-কে `ask` বা `deny` করুন।
-
-নিষ্ক্রিয় built-ins:
-
-```json
-"agent": {
-  "build": { "disable": true },
-  "docs": { "disable": true },
-  "plan": { "disable": true }
-}
-```
-
-### 3.1 LocalReader
-
-```json
-"LocalReader": {
-  "description": "Read-first agent; asks for non-read actions",
-  "mode": "all",
-  "permission": {
-    "*": "ask",
-    "bash": "ask",
-    "edit": "ask",
-    "glob": "allow",
-    "grep": "allow",
-    "list": "allow",
-    "read": {
-      "*": "allow",
-      "*.env": "allow",
-      "*.env.*": "allow"
-    },
-    "plan_enter": "deny",
-    "plan_exit": "deny",
-    "todoread": "deny",
-    "todowrite": "deny"
-  }
-}
-```
-
-### 3.2 LocalScribe (ডিফল্ট)
-
-```json
-"LocalScribe": {
-  "description": "Reads any path; writes only inside workspace",
-  "mode": "all",
-  "permission": {
-    "*": "allow",
-    "bash": {
-      "*": "allow",
-      "sudo *": "ask",
-      "su *": "ask",
-      "rm -rf *": "ask",
-      "rm -fr *": "ask",
-      "mkfs* *": "ask",
-      "reboot *": "ask",
-      "shutdown *": "ask",
-      "dd *": "ask"
-    },
-    "edit": {
-      "*": "allow",
-      "*../*": "deny"
-    },
-    "external_directory": "allow",
-    "plan_enter": "deny",
-    "plan_exit": "deny",
-    "todoread": "deny",
-    "todowrite": "deny"
-  }
-}
-```
-
-### 3.3 OmniReader
-
-```json
-"OmniReader": {
-  "description": "Read-first agent for all paths; asks for non-read actions",
-  "mode": "all",
-  "permission": {
-    "*": "ask",
-    "external_directory": "allow",
-    "read": {
-      "*": "allow",
-      "*.env": "allow",
-      "*.env.*": "allow"
-    },
-    "bash": "ask",
-    "edit": "ask"
-  }
-}
-```
-
-### 3.4 OmniScribe
-
-```json
-"OmniScribe": {
-  "description": "Dangerous full access read/write anywhere",
-  "mode": "all",
-  "permission": {
-    "*": "allow",
-    "bash": {
-      "*": "allow",
-      "sudo *": "ask",
-      "rm -rf *": "ask",
-      "mkfs* *": "ask"
-    },
-    "external_directory": "allow",
-    "plan_enter": "deny",
-    "plan_exit": "deny"
-  }
-}
-```
-
-## 4. Provider ও model catalog কাঠামো
-
-তিনটি provider:
-
-- `my_claude` (`@ai-sdk/anthropic`)
-- `my_gemini` (`@ai-sdk/google`)
-- `my_oai` (`@ai-sdk/openai`)
-
-Provider কাঠামো:
-
-1. provider metadata: `name`, `npm`
-2. provider connection options: `options.baseURL`, `options.apiKey`, `options.setCacheKey` (সাধারণত OpenAI-compatible provider-এ ব্যবহৃত)
-3. `models` map: প্রতিটি model-এর জন্য একটি object
-
-### 4.1 সাধারণ model JSON কাঠামো
-
-```json
-"provider": {
-  "my_oai": {
-    "name": "my_oai",
-    "npm": "@ai-sdk/openai",
-    "options": {
-      "apiKey": "{env:OAI_API_KEY}",
-      "baseURL": "https://your-gateway.example/v1",
-      "setCacheKey": true
-    },
-    "models": {
-      "gpt-5.3-codex": {
-        "name": "gpt-5.3-codex",
-        "attachment": true,
-        "limit": {
-          "context": 400000,
-          "output": 128000
-        },
-        "modalities": {
-          "input": ["text", "image", "pdf"],
-          "output": ["text"]
-        },
-        "options": {
-          "store": false,
-          "include": ["reasoning.encrypted_content"]
-        },
-        "variants": {
-          "high": { "reasoningEffort": "high", "reasoningSummary": "auto", "textVerbosity": "medium" },
-          "medium": { "reasoningEffort": "medium", "reasoningSummary": "auto", "textVerbosity": "medium" },
-          "low": { "reasoningEffort": "low", "reasoningSummary": "auto", "textVerbosity": "medium" },
-          "xhigh": { "reasoningEffort": "xhigh", "reasoningSummary": "auto", "textVerbosity": "medium" }
-        }
-      }
-    }
-  }
-}
-```
-
-### 4.2 model ফিল্ড রেফারেন্স
-
-| Field | Type | অর্থ |
-| :-- | :-- | :-- |
-| `name` | `string` | প্রদর্শন নাম |
-| `attachment` | `boolean` | attachments সক্রিয় কি না |
-| `limit.context` | `number` | মোট context window |
-| `limit.output` | `number` | সর্বোচ্চ output tokens |
-| `modalities.input` | `string[]` | input modalities, যেমন `text/image/pdf` |
-| `modalities.output` | `string[]` | output modalities, সাধারণত `text` |
-| `options.store` | `boolean` | request storage toggle (বর্তমানে OAI-family মডেলে `false`) |
-| `options.include` | `string[]` | অতিরিক্ত returned fields (যেমন `reasoning.encrypted_content`) |
-| `variants` | `object` | per-model reasoning profiles |
-
-### 4.3 provider অনুযায়ী `variants` প্যাটার্ন
-
-`my_claude`:
-
-```json
-"variants": {
-  "off": { "thinking": { "type": "disabled" } },
-  "high": { "thinking": { "type": "enabled", "budgetTokens": 16000 } },
-  "max": { "thinking": { "type": "enabled", "budgetTokens": 128000 } }
-}
-```
-
-`my_gemini`:
-
-```json
-"variants": {
-  "off": { "thinkingConfig": { "thinkingBudget": 0 } },
-  "high": { "thinkingConfig": { "includeThoughts": true, "thinkingBudget": 16000 } },
-  "max": { "thinkingConfig": { "includeThoughts": true, "thinkingBudget": 24576 } }
-}
-```
-
-`my_oai`:
-
-```json
-"variants": {
-  "low": { "reasoningEffort": "low", "reasoningSummary": "auto", "textVerbosity": "medium" },
-  "medium": { "reasoningEffort": "medium", "reasoningSummary": "auto", "textVerbosity": "medium" },
-  "high": { "reasoningEffort": "high", "reasoningSummary": "auto", "textVerbosity": "medium" },
-  "minimal": { "reasoningEffort": "minimal", "reasoningSummary": "auto", "textVerbosity": "low" }
-}
-```
-
-### 4.4 provider-লেভেল option ফিল্ড
-
-সাধারণ `provider.<id>.options` ফিল্ড:
-
-| Field | Type | অর্থ |
-| :-- | :-- | :-- |
-| `apiKey` | `string` | provider API key |
-| `baseURL` | `string` | provider gateway URL |
-| `setCacheKey` | `boolean` | OpenAI-compatible provider-এর cache-key আচরণ |
-
-## 5. প্লাগিন লোডিং
-
-Plugin কনফিগ:
+### 5.1 Plugin list (npm names)
 
 ```json
 "plugin": [
   "opencode-planpilot",
-  "opencode-workbench"
+  "opencode-workbench",
+  "opencode-web-preview",
+  "opencode-cx-agents"
 ]
 ```
 
-### 5.1 opencode-planpilot (npm)
+### 5.2 `opencode-planpilot`
 
-- npm: [opencode-planpilot](https://www.npmjs.com/package/opencode-planpilot)
-- প্যাকেজ বিবরণ: `Planpilot plugin for OpenCode`
-- মূল সক্ষমতা:
-  - জটিল কাজকে `plan -> step -> goal` এ ভাগ করে।
-  - পরবর্তী ধাপ `ai`-কে অ্যাসাইন থাকলে auto-continue করে।
-  - লোকাল প্রগ্রেস স্থায়ীভাবে সংরক্ষণ করে (database + Markdown snapshot)।
-  - প্রাকৃতিক ভাষার ট্রিগার ফ্লো সমর্থন করে (যেমন, "use planpilot")।
+**ভূমিকা**: complex task-এর জন্য structured execution।  
+**Core capabilities**:
 
-### 5.2 opencode-workbench (npm)
+- unified model: `plan -> step -> goal`
+- `ai / human` executor split
+- next executor `ai` হলে auto-continue
 
-- npm: [opencode-workbench](https://www.npmjs.com/package/opencode-workbench)
-- প্যাকেজ বিবরণ: `Branch sandboxes for parallel OpenCode development`
-- মূল সক্ষমতা:
-  - `git worktree`-কে OpenCode session-এর সাথে map করে parallel routing করে।
-  - supervisor/worker orchestration দিয়ে সমান্তরাল কাজ পরিচালনা করে।
-  - branch, fork ও PR metadata multi-task delivery-এর জন্য ট্র্যাক করে।
-  - ঐচ্ছিক version pinning (যেমন, `opencode-workbench@0.3.2`)।
+**উপযুক্ত ব্যবহার**: multi-stage দীর্ঘ task যেখানে progress tracking দরকার।
 
-## 6. পূর্ণ কনফিগ উদাহরণ
+### 5.3 `opencode-workbench`
 
-নিচে production-ধরনের একটি ব্যবহারযোগ্য পূর্ণ উদাহরণ (JSONC):
+**ভূমিকা**: branch/worktree-ভিত্তিক parallel orchestration।  
+**Core capabilities**:
 
-```jsonc
-{
-  "$schema": "https://opencode.ai/config.json",
-  "default_agent": "LocalScribe",
-  "model": "my_oai/gpt-5.3-codex",
-  "small_model": "my_oai/gpt-5.3-codex",
-  "autoupdate": false,
-  "compaction": {
-    "auto": true,
-    "prune": true
-  },
-  "plugin": [
-    "opencode-planpilot",
-    "opencode-workbench"
-  ],
-  "provider": {
-    "my_oai": {
-      "name": "my_oai",
-      "npm": "@ai-sdk/openai",
-      "options": {
-        "apiKey": "{env:OAI_API_KEY}",
-        "baseURL": "https://your-gateway.example/v1",
-        "setCacheKey": true
-      },
-      "models": {
-        "gpt-5.3-codex": {
-          "name": "gpt-5.3-codex",
-          "attachment": true,
-          "limit": {
-            "context": 400000,
-            "output": 128000
-          },
-          "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
-          },
-          "options": {
-            "store": false,
-            "include": ["reasoning.encrypted_content"]
-          },
-          "variants": {
-            "low": { "reasoningEffort": "low", "reasoningSummary": "auto", "textVerbosity": "medium" },
-            "medium": { "reasoningEffort": "medium", "reasoningSummary": "auto", "textVerbosity": "medium" },
-            "high": { "reasoningEffort": "high", "reasoningSummary": "auto", "textVerbosity": "medium" }
-          }
-        }
-      }
-    }
-  }
-}
-```
+- session-to-worktree explicit binding
+- worktree অনুযায়ী task routing
+- branch/task context traceability
 
-এই সেটআপ ব্যক্তি ও টিম—দুই ক্ষেত্রেই ভালো কাজ করে: read/write সীমা স্পষ্ট থাকে, model আচরণ স্থির থাকে, এবং plugin-ভিত্তিক workflow সহজে সম্প্রসারণযোগ্য হয়।
+**উপযুক্ত ব্যবহার**: একই repo-তে একাধিক task সমান্তরালভাবে চালানো।
+
+### 5.4 `opencode-web-preview`
+
+**ভূমিকা**: local frontend preview session management।  
+**Core capabilities**:
+
+- available preview session খুঁজে পাওয়া
+- local preview host start/stop
+- preview status check
+
+**উপযুক্ত ব্যবহার**: UI পরিবর্তনের দ্রুত validation।
+
+### 5.5 `opencode-cx-agents`
+
+**ভূমিকা**: preset agents সরবরাহ (যেমন `cx-omni`)।  
+**Core capabilities**:
+
+- naming এবং behavior baseline একীভূত করা
+- per-project agent boilerplate কমানো
+
+**উপযুক্ত ব্যবহার**: একাধিক repo-তে consistent agent strategy রাখা।
+
+## 6. Provider এবং model routing
+
+বর্তমান layout: এক gateway domain, provider-specific routes.
+
+| Provider | baseURL | বর্ণনা |
+| :-- | :-- | :-- |
+| `anthropic` | `https://gateway.example.com/v1` | Anthropic-compatible route |
+| `google` | `https://gateway.example.com/v1beta` | Gemini-compatible route |
+| `openai` | `https://gateway.example.com/v1` | OpenAI-compatible route |
