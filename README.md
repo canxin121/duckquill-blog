@@ -36,6 +36,12 @@ Duckquill is added as a git submodule at `themes/duckquill`.
 
 - Update `base_url` in `zola.toml` to your final domain before publishing.
 
+## Multiple domains
+
+- Duckquill resources and regular internal navigation are emitted as root-relative URLs, so one generated `public/` directory can be served by multiple domains.
+- `base_url` remains the canonical URL for RSS/Atom feeds, Open Graph metadata, and sharing links; those protocols require an absolute public URL.
+- For Markdown links that must keep the current browser domain, use a relative path such as `[Home](../../)` instead of Zola's `@/` link syntax, because `@/` deliberately expands to the canonical `base_url`.
+
 ## GitHub comments (Giscus)
 
 This site supports Giscus comments for GitHub users.

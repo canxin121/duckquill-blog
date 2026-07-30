@@ -35,7 +35,7 @@ disclaimer = """
 
 متن کی اسٹائلز: **bold**، *italic*، ~~strikethrough~~، `inline code`، اور ملا ہوا انداز ***~~all together~~***۔
 
-- اندرونی لنک: [Home](@/_index.md)
+- اندرونی لنک: [Home](../../)
 - بیرونی لنک: [Zola Documentation](https://www.getzola.org/documentation/)
 - Emoji: 😭😂🥺🤣❤️✨🙏😍🥰😊
 
@@ -301,7 +301,7 @@ Progress bar مثال (range input کے ساتھ page script کے ذریعے م�
 
 ## Backlinks ڈیمو
 
-میں نے [about](@/_index.md) صفحے سے اس پوسٹ کا ایک لنک شامل کیا ہے۔
+میں نے [about](../../) صفحے سے اس پوسٹ کا ایک لنک شامل کیا ہے۔
 
 اگر quick-action buttons میں `Backlinks` آئٹم نظر آئے تو internal backlink index درست چل رہا ہے۔
 

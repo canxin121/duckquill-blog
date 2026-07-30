@@ -1,3 +1,5 @@
+{% import "macros/urls.html" as macros_urls %}
+
 {%- set rel_attributes = macros_rel_attributes::rel_attributes() | trim -%}
 
 {%- if config.extra.nav.auto_hide %}
@@ -10,7 +12,7 @@
 		</a>
 		<ul>
 			<li id="home">
-				<a href="{{ get_url(path='/', lang=lang) }}"
+				<a href="{{ macros_urls::host_relative(url=get_url(path='/', lang=lang)) }}"
 					{%- if current_url | default(value="/") | trim_end_matches(pat="/") | safe == get_url(path="/", lang=lang) | trim_end_matches(pat='/') | safe -%}
 						class="active"
 					{%- endif -%}>
@@ -34,7 +36,7 @@
 										</li>
 									{%- else %}
 										<li>
-											<a href="{{ get_url(path=link.url, lang=lang)}}"
+										<a href="{{ macros_urls::host_relative(url=get_url(path=link.url, lang=lang)) }}"
 												{%- if current_url | default(value='/') | trim_end_matches(pat='/') | safe == get_url(path=link.url, lang=lang) | trim_end_matches(pat='/') | safe -%}
 													class="active"
 												{%- endif -%}>
@@ -54,7 +56,7 @@
 					</li>
 				{%- else %}
 					<li>
-						<a href="{{ get_url(path=link.url, lang=lang)}}"
+						<a href="{{ macros_urls::host_relative(url=get_url(path=link.url, lang=lang)) }}"
 							{%- if current_url | default(value='/') | trim_end_matches(pat='/') | safe == get_url(path=link.url, lang=lang) | trim_end_matches(pat='/') | safe -%}
 								class="active"
 							{%- endif -%}>
@@ -109,7 +111,7 @@
 						<ul>
 							{%- for feed in config.feed_filenames %}
 								<li>
-									<a href="{{ get_url(path=feed, lang=lang) }}" rel="{{ rel_attributes }}">
+									<a href="{{ macros_urls::host_relative(url=get_url(path=feed, lang=lang)) }}" rel="{{ rel_attributes }}">
 										{%- if feed == "atom.xml" -%}
 											Atom
 										{%- else -%}
@@ -123,7 +125,7 @@
 				</li>
 			{%- elif config.generate_feeds and config.extra.nav.show_feed %}
 				<li id="feed">
-					<a class="circle" href="{{ get_url(path=config.feed_filenames[0], lang=lang) }}" title="{{ macros_translate::translate(key='feed', default='Feed', language_strings=language_strings) }}">
+					<a class="circle" href="{{ macros_urls::host_relative(url=get_url(path=config.feed_filenames[0], lang=lang)) }}" title="{{ macros_translate::translate(key='feed', default='Feed', language_strings=language_strings) }}">
 						<i class="icon"></i>
 					</a>
 				</li>

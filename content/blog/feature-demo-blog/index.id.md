@@ -35,7 +35,7 @@ Pos ini adalah **halaman blog demo** di situs ini, dipakai untuk memusatkan dan 
 
 Gaya teks: **tebal**, *miring*, ~~coret~~, `kode inline`, bahkan gaya gabungan ***~~sekalian semua~~***.
 
-- Tautan internal: [Beranda](@/_index.md)
+- Tautan internal: [Beranda](../../)
 - Tautan eksternal: [Dokumentasi Zola](https://www.getzola.org/documentation/)
 - Emoji: 😭😂🥺🤣❤️✨🙏😍🥰😊
 
@@ -301,7 +301,7 @@ Bagian ini adalah checklist ringkas untuk memvalidasi rendering konfigurasi ting
 
 ## Demo Backlinks
 
-Saya sudah menambahkan tautan ke pos ini dari halaman [tentang](@/_index.md).
+Saya sudah menambahkan tautan ke pos ini dari halaman [tentang](../../).
 
 Jika item `Backlinks` muncul di tombol aksi cepat, berarti indeks backlink internal berfungsi dengan semestinya.
 

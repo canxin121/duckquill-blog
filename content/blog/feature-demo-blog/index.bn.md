@@ -35,7 +35,7 @@ disclaimer = """
 
 টেক্সট স্টাইল: **bold**, *italic*, ~~strikethrough~~, `inline code`, এবং মিলিয়ে লেখা ***~~all together~~***।
 
-- অভ্যন্তরীণ লিংক: [Home](@/_index.md)
+- অভ্যন্তরীণ লিংক: [Home](../../)
 - বাহ্যিক লিংক: [Zola Documentation](https://www.getzola.org/documentation/)
 - Emoji: 😭😂🥺🤣❤️✨🙏😍🥰😊
 
@@ -301,7 +301,7 @@ Progress bar উদাহরণ (range input-এর সাথে page script দ
 
 ## Backlinks ডেমো
 
-আমি [about](@/_index.md) পেজ থেকে এই পোস্টে একটি লিংক যোগ করেছি।
+আমি [about](../../) পেজ থেকে এই পোস্টে একটি লিংক যোগ করেছি।
 
 যদি quick-action বাটনে `Backlinks` দেখা যায়, তাহলে internal backlink index প্রত্যাশামতো কাজ করছে।
 

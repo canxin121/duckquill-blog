@@ -35,7 +35,7 @@ This post is the **demo blog page** of this site, used to centralize and verify 
 
 Text styles: **bold**, *italic*, ~~strikethrough~~, `inline code`, and even combined style ***~~all together~~***.
 
-- Internal link: [Home](@/_index.md)
+- Internal link: [Home](../../)
 - External link: [Zola Documentation](https://www.getzola.org/documentation/)
 - Emoji: 😭😂🥺🤣❤️✨🙏😍🥰😊
 
@@ -301,7 +301,7 @@ This section is a compact checklist for validating page-level config rendering.
 
 ## Backlinks Demo
 
-I have added a link to this post from the [about](@/_index.md) page.
+I have added a link to this post from the [about](../../) page.
 
 If a `Backlinks` item appears in the quick-action buttons, the internal backlink index is working as expected.
 

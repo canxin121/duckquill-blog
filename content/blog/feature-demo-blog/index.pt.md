@@ -35,7 +35,7 @@ Este post e a **pagina de demo do blog** deste site, usada para centralizar e va
 
 Estilos de texto: **negrito**, *italico*, ~~tachado~~, `codigo inline` e ate estilo combinado ***~~tudo junto~~***.
 
-- Link interno: [Home](@/_index.md)
+- Link interno: [Home](../../)
 - Link externo: [Documentacao do Zola](https://www.getzola.org/documentation/)
 - Emoji: 😭😂🥺🤣❤️✨🙏😍🥰😊
 
@@ -301,7 +301,7 @@ Esta secao e um checklist compacto para validar a renderizacao de configuracoes 
 
 ## Demo de Backlinks
 
-Adicionei um link para este post na pagina [about](@/_index.md).
+Adicionei um link para este post na pagina [about](../../).
 
 Se aparecer um item `Backlinks` nos botoes de acao rapida, o indice de backlinks internos esta funcionando como esperado.
 
