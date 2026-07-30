@@ -90,12 +90,28 @@
 .unicom-login-code-row {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) auto;
-	gap: 0.75rem;
-	align-items: end;
+	grid-template-rows: auto 2.625rem;
+	column-gap: 0.75rem;
+	row-gap: 0.45rem;
+	align-items: stretch;
 }
 
 .unicom-login-code-row .unicom-login-field {
-	margin-bottom: 0;
+	display: contents;
+}
+
+.unicom-login-code-row .unicom-login-field label {
+	grid-column: 1;
+	grid-row: 1;
+	margin: 0;
+	align-self: end;
+}
+
+.unicom-login-code-row .unicom-login-field input {
+	grid-column: 1;
+	grid-row: 2;
+	min-height: 0;
+	height: 2.625rem;
 }
 
 .unicom-login-app button,
@@ -137,39 +153,64 @@
 }
 
 .unicom-login-code-row > button {
+	grid-column: 2;
+	grid-row: 2;
+	align-self: stretch;
+	min-height: 0;
 	padding: 0.55rem 0.9rem;
 }
 
 .unicom-login-help-button {
+	box-sizing: border-box;
 	display: inline-grid;
 	place-items: center;
 	flex: 0 0 auto;
-	min-height: 2rem !important;
+	min-width: 2.25rem !important;
+	min-height: 2.25rem !important;
 	padding: 0 !important;
-	width: 2rem;
-	border-radius: 50% !important;
+	width: 2.25rem !important;
+	height: 2.25rem !important;
+	border: 0.0625rem solid var(--fg-muted-3) !important;
+	border-radius: 999rem !important;
+	background: var(--accent-color-alpha) !important;
 	color: var(--accent-color) !important;
-	font-family: var(--font-transitional);
+	font-family: var(--font-system-ui);
 	font-size: var(--font-size-large) !important;
 	line-height: 1;
 }
 
-.unicom-login-help-panel {
-	position: absolute;
-	top: clamp(4rem, 12vw, 5.25rem);
-	right: clamp(1rem, 3vw, 1.5rem);
-	z-index: 2;
-	padding: 0.875rem;
-	width: min(24rem, calc(100% - 2rem));
-	border-radius: var(--rounded-corner);
-	background: var(--glass-bg);
-	box-shadow: var(--edge-highlight), var(--shadow-raised);
+.unicom-login-help-button:hover {
+	background: var(--accent-color) !important;
+	color: var(--contrast-color) !important;
+}
+
+.unicom-login-help-dialog {
+	position: fixed;
+	inset: 0;
+	z-index: 128;
+	display: grid;
+	place-items: center;
+	padding: 1rem;
+	background: var(--bg-overlay);
 	backdrop-filter: var(--blur);
 	-webkit-backdrop-filter: var(--blur);
 }
 
-.unicom-login-help-panel[hidden] {
+.unicom-login-help-dialog[hidden] {
 	display: none;
+}
+
+.unicom-login-help-panel {
+	box-sizing: border-box;
+	padding: 0.875rem;
+	width: min(28rem, 100%);
+	max-height: min(32rem, calc(100vh - 2rem));
+	border-radius: var(--rounded-corner);
+	background: var(--glass-bg);
+	box-shadow: var(--edge-highlight), var(--shadow-raised);
+	overflow: auto;
+	backdrop-filter: var(--blur);
+	-webkit-backdrop-filter: var(--blur);
 }
 
 .unicom-login-help-header {
@@ -184,10 +225,12 @@
 }
 
 .unicom-login-help-close {
-	min-height: 1.75rem !important;
+	min-width: 2rem !important;
+	min-height: 2rem !important;
 	padding: 0 !important;
-	width: 1.75rem;
-	border-radius: 50% !important;
+	width: 2rem !important;
+	height: 2rem !important;
+	border-radius: 999rem !important;
 	font-size: var(--font-size-large) !important;
 	line-height: 1;
 }
@@ -326,12 +369,26 @@
 
 	.unicom-login-code-row {
 		grid-template-columns: 1fr;
-		gap: 0;
+		grid-template-rows: auto 2.625rem auto;
+		row-gap: 0.45rem;
+	}
+
+	.unicom-login-code-row .unicom-login-field label {
+		grid-column: 1;
+		grid-row: 1;
+	}
+
+	.unicom-login-code-row .unicom-login-field input {
+		grid-column: 1;
+		grid-row: 2;
 	}
 
 	.unicom-login-code-row > button {
+		grid-column: 1;
+		grid-row: 3;
+		align-self: stretch;
 		width: 100%;
-		margin: -0.35rem 0 1rem;
+		margin: 0;
 	}
 
 	.unicom-credential-row {
