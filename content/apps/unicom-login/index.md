@@ -1,6 +1,6 @@
 ---
-title: "中国联通短信登录"
-description: "中国联通账号的一次性短信登录工具。"
+title: "联通助手"
+description: "中国联通服务工具。"
 template: "unicom-login.html"
 extra:
   styles:

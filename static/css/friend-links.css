@@ -243,16 +243,10 @@ main:has(.friend-meta-launcher) {
 }
 
 .app-link-icon {
-  display: inline-grid;
-  place-items: center;
   width: 2rem;
   height: 2rem;
-  border-radius: 0.3rem;
-  background: var(--accent-color-alpha);
-  color: var(--accent-color);
-  font-size: 0.9rem;
-  font-weight: bold;
-  line-height: 1;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .friend-link-meta {

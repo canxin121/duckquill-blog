@@ -20,6 +20,9 @@
 		rows: byId("unicom-credential-rows"),
 		copyPackage: byId("unicom-copy-package"),
 		clear: byId("unicom-clear-result"),
+		helpButton: byId("unicom-login-help-button"),
+		helpPanel: byId("unicom-login-help-panel"),
+		helpClose: byId("unicom-login-help-close"),
 	};
 
 	let loginContext = null;
@@ -53,6 +56,12 @@
 	function setButton(button, busy, label) {
 		button.disabled = busy;
 		if (label) button.textContent = label;
+	}
+
+	function setHelpOpen(open) {
+		fields.helpPanel.hidden = !open;
+		fields.helpButton.setAttribute("aria-expanded", String(open));
+		if (open) fields.helpClose.focus();
 	}
 
 	async function postJson(path, value) {
@@ -310,5 +319,21 @@
 		copyText(lastCredentials && JSON.stringify(lastCredentials, null, 2), fields.copyPackage);
 	});
 	fields.clear.addEventListener("click", () => clearSensitiveState());
-	window.addEventListener("pagehide", clearSensitiveState);
+	fields.helpButton.addEventListener("click", () => setHelpOpen(fields.helpPanel.hidden));
+	fields.helpClose.addEventListener("click", () => setHelpOpen(false));
+	document.addEventListener("click", (event) => {
+		if (!fields.helpPanel.hidden && !fields.helpPanel.contains(event.target) && !fields.helpButton.contains(event.target)) {
+			setHelpOpen(false);
+		}
+	});
+	document.addEventListener("keydown", (event) => {
+		if (event.key === "Escape" && !fields.helpPanel.hidden) {
+			setHelpOpen(false);
+			fields.helpButton.focus();
+		}
+	});
+	window.addEventListener("pagehide", () => {
+		setHelpOpen(false);
+		clearSensitiveState();
+	});
 })();

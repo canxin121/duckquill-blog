@@ -1,6 +1,6 @@
 ---
-title: "China Unicom SMS Login"
-description: "One-time China Unicom SMS sign-in."
+title: "Unicom Assistant"
+description: "China Unicom service tools."
 template: "unicom-login.html"
 extra:
   styles:

@@ -10,14 +10,20 @@
     <div class="unicom-login-app-header">
       <div>
         <p class="unicom-login-kicker">应用</p>
-        <h2 id="unicom-login-app-title">中国联通短信登录</h2>
+        <h2 id="unicom-login-app-title">联通助手</h2>
       </div>
-      <span class="unicom-login-badge">一次性登录</span>
+      <button id="unicom-login-help-button" class="unicom-login-help-button" type="button" aria-label="使用说明" aria-controls="unicom-login-help-panel" aria-expanded="false" title="使用说明">?</button>
     </div>
 
-    <p class="unicom-login-notice">
-      仅用于账号本人。登录结果会在离开页面或点击清除后自动丢弃。
-    </div>
+    <section id="unicom-login-help-panel" class="unicom-login-help-panel" hidden role="dialog" aria-labelledby="unicom-login-help-title">
+      <div class="unicom-login-help-header">
+        <strong id="unicom-login-help-title">使用说明</strong>
+        <button id="unicom-login-help-close" class="unicom-login-help-close" type="button" aria-label="关闭使用说明" title="关闭">×</button>
+      </div>
+      <p>仅用于账号本人。手机号、短信验证码和生成的凭据只在当前页面中使用；本服务不会保存它们。</p>
+      <p>离开页面或点击“清除”后，页面中的敏感数据会被丢弃。请妥善保管复制出的登录凭据。</p>
+      <p class="unicom-login-help-projects">相关项目：<a class="external" href="https://github.com/canxin121/china_unicom_oxidebot" rel="noopener noreferrer" target="_blank">china_unicom_oxidebot</a>、<a class="external" href="https://github.com/canxin121/china-unicom-rs" rel="noopener noreferrer" target="_blank">china-unicom-rs</a></p>
+    </section>
 
     <div class="unicom-login-field">
       <label for="unicom-mobile">中国联通手机号</label>
