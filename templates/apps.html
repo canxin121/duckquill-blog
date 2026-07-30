@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% import "macros/urls.html" as macros_urls %}
+
+{% block content %}
+<article class="apps-page">
+  <div id="heading">
+    <h1>{{ section.title }}</h1>
+  </div>
+
+  <ul class="friend-links-grid apps-grid">
+    <li class="friend-link-card">
+      <a class="friend-link-main" href="{{ macros_urls::host_relative(url=get_url(path='@/apps/unicom-login/index.md', lang=lang)) }}">
+        <span class="app-link-icon" aria-hidden="true">联</span>
+        <span class="friend-link-meta">
+          <span class="friend-link-name">中国联通短信登录</span>
+          <span class="friend-link-desc">短信验证码登录工具</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+</article>
+{% endblock content %}
