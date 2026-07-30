@@ -28,12 +28,20 @@
 }
 
 .unicom-login-app {
+	display: grid;
 	position: relative;
+	gap: 1.25rem;
 	margin: 1.5rem 0 2.5rem;
 	padding: clamp(1rem, 3vw, 1.5rem);
 	border-radius: var(--rounded-corner);
 	background: var(--glass-bg);
 	box-shadow: var(--edge-highlight), var(--shadow-raised);
+}
+
+.unicom-login-toolbar {
+	display: flex;
+	justify-content: flex-end;
+	min-height: 2.25rem;
 }
 
 .unicom-login-result-header,
@@ -52,7 +60,7 @@
 }
 
 .unicom-login-field {
-	margin: 0 0 1rem;
+	margin: 0;
 }
 
 .unicom-login-field label {
@@ -161,9 +169,6 @@
 .unicom-login-help-button {
 	box-sizing: border-box;
 	display: inline-grid;
-	position: absolute;
-	top: clamp(1rem, 3vw, 1.5rem);
-	right: clamp(1rem, 3vw, 1.5rem);
 	place-items: center;
 	flex: 0 0 auto;
 	min-width: 2.25rem !important;
@@ -246,7 +251,7 @@
 
 .unicom-login-primary {
 	width: 100%;
-	margin-top: 0.15rem;
+	margin: 0;
 	padding: 0.55rem 0.9rem;
 	background: var(--accent-color-alpha) !important;
 	color: var(--accent-color) !important;
@@ -259,7 +264,7 @@
 
 .unicom-login-message {
 	display: none;
-	margin: 1rem 0 0;
+	margin: 0;
 	padding: 0.75rem 0.875rem;
 	border-left: 0.1875rem solid var(--accent-color);
 	border-radius: 0 var(--rounded-corner-small) var(--rounded-corner-small) 0;
@@ -285,7 +290,7 @@
 }
 
 .unicom-login-result {
-	margin-top: 1.25rem;
+	margin: 0;
 	border-radius: var(--rounded-corner);
 	background: var(--fg-muted-1);
 	box-shadow: var(--edge-highlight), var(--shadow);
