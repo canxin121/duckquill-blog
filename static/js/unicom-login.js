@@ -327,6 +327,15 @@
 			setHelpOpen(false);
 		}
 	});
+	document.addEventListener("click", (event) => {
+		if (
+			!fields.helpDialog.hidden &&
+			!fields.helpPanel.contains(event.target) &&
+			!fields.helpButton.contains(event.target)
+		) {
+			setHelpOpen(false);
+		}
+	});
 	document.addEventListener("keydown", (event) => {
 		if (event.key === "Escape" && !fields.helpDialog.hidden) {
 			setHelpOpen(false);

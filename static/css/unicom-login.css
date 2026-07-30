@@ -36,7 +36,6 @@
 	box-shadow: var(--edge-highlight), var(--shadow-raised);
 }
 
-.unicom-login-app-header,
 .unicom-login-result-header,
 .unicom-login-result-actions {
 	display: flex;
@@ -44,7 +43,6 @@
 	gap: 0.75rem;
 }
 
-.unicom-login-app-header,
 .unicom-login-result-header {
 	justify-content: space-between;
 }
@@ -163,6 +161,9 @@
 .unicom-login-help-button {
 	box-sizing: border-box;
 	display: inline-grid;
+	position: absolute;
+	top: clamp(1rem, 3vw, 1.5rem);
+	right: clamp(1rem, 3vw, 1.5rem);
 	place-items: center;
 	flex: 0 0 auto;
 	min-width: 2.25rem !important;
@@ -185,15 +186,12 @@
 }
 
 .unicom-login-help-dialog {
-	position: fixed;
-	inset: 0;
-	z-index: 128;
-	display: grid;
-	place-items: center;
-	padding: 1rem;
-	background: var(--bg-overlay);
-	backdrop-filter: var(--blur);
-	-webkit-backdrop-filter: var(--blur);
+	position: absolute;
+	top: clamp(3.75rem, 10vw, 4.5rem);
+	right: clamp(1rem, 3vw, 1.5rem);
+	z-index: 16;
+	display: block;
+	width: min(28rem, calc(100% - 2rem));
 }
 
 .unicom-login-help-dialog[hidden] {
@@ -203,10 +201,10 @@
 .unicom-login-help-panel {
 	box-sizing: border-box;
 	padding: 0.875rem;
-	width: min(28rem, 100%);
-	max-height: min(32rem, calc(100vh - 2rem));
+	width: 100%;
+	max-height: min(32rem, calc(100vh - 6rem));
 	border-radius: var(--rounded-corner);
-	background: var(--glass-bg);
+	background: var(--bg-color);
 	box-shadow: var(--edge-highlight), var(--shadow-raised);
 	overflow: auto;
 	backdrop-filter: var(--blur);
@@ -361,7 +359,6 @@
 }
 
 @media (max-width: 35rem) {
-	.unicom-login-app-header,
 	.unicom-login-result-header {
 		align-items: flex-start;
 		flex-direction: column;

@@ -3,20 +3,14 @@
 {% block content %}
 <article class="unicom-login-page">
   <header class="unicom-login-heading">
-    <h1>{{ page.title }}</h1>
+    <h1 id="unicom-login-page-title">{{ page.title }}</h1>
   </header>
 
-  <section id="unicom-login-app" class="unicom-login-app" data-api-base="/api/unicom" aria-labelledby="unicom-login-app-title">
-    <div class="unicom-login-app-header">
-      <div>
-        <p class="unicom-login-kicker">应用</p>
-        <h2 id="unicom-login-app-title">联通助手</h2>
-      </div>
-      <button id="unicom-login-help-button" class="unicom-login-help-button" type="button" aria-label="使用说明" aria-controls="unicom-login-help-dialog" aria-expanded="false" title="使用说明">?</button>
-    </div>
+  <section id="unicom-login-app" class="unicom-login-app" data-api-base="/api/unicom" aria-labelledby="unicom-login-page-title">
+    <button id="unicom-login-help-button" class="unicom-login-help-button" type="button" aria-label="使用说明" aria-controls="unicom-login-help-dialog" aria-expanded="false" title="使用说明">?</button>
 
     <div id="unicom-login-help-dialog" class="unicom-login-help-dialog" hidden>
-      <section id="unicom-login-help-panel" class="unicom-login-help-panel" role="dialog" aria-modal="true" aria-labelledby="unicom-login-help-title">
+      <section id="unicom-login-help-panel" class="unicom-login-help-panel" role="dialog" aria-labelledby="unicom-login-help-title">
         <div class="unicom-login-help-header">
           <strong id="unicom-login-help-title">使用说明</strong>
           <button id="unicom-login-help-close" class="unicom-login-help-close" type="button" aria-label="关闭使用说明" title="关闭">×</button>
