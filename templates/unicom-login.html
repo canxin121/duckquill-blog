@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article class="unicom-login-page">
+  <header class="unicom-login-heading">
+    <p class="unicom-login-eyebrow">小工具 · EdgeOne Pages Functions</p>
+    <h1>{{ page.title }}</h1>
+    <p>{{ page.description }}</p>
+  </header>
+
+  <section id="unicom-login-app" class="unicom-login-app" data-api-base="/api/unicom" aria-labelledby="unicom-login-app-title">
+    <div class="unicom-login-app-header">
+      <div>
+        <p class="unicom-login-kicker">一次性短信登录</p>
+        <h2 id="unicom-login-app-title">中国联通短信登录</h2>
+      </div>
+      <span class="unicom-login-badge">无持久化</span>
+    </div>
+
+    <p class="unicom-login-notice">
+      仅限账号本人使用。手机号、短信验证码和登录凭据只保留在当前浏览器内存中；刷新、关闭页面或点击清除后即会丢弃。
+    </p>
+
+    <div class="unicom-login-field">
+      <label for="unicom-access-key">访问口令</label>
+      <input id="unicom-access-key" type="password" autocomplete="off" spellcheck="false" placeholder="由站点管理员单独提供">
+      <p class="unicom-login-hint">口令由 EdgeOne 环境变量校验，不会保存到浏览器存储。</p>
+    </div>
+
+    <div class="unicom-login-field">
+      <label for="unicom-mobile">中国联通手机号</label>
+      <input id="unicom-mobile" type="tel" inputmode="numeric" autocomplete="off" maxlength="11" placeholder="11 位手机号">
+    </div>
+
+    <div class="unicom-login-code-row">
+      <div class="unicom-login-field">
+        <label for="unicom-sms-code">短信验证码</label>
+        <input id="unicom-sms-code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="4–8 位验证码">
+      </div>
+      <button id="unicom-send-code" type="button">发送验证码</button>
+    </div>
+
+    <button id="unicom-login-submit" class="unicom-login-primary" type="button">登录并生成凭据</button>
+    <p id="unicom-login-message" class="unicom-login-message" role="status" aria-live="polite"></p>
+
+    <section id="unicom-login-result" class="unicom-login-result" hidden aria-labelledby="unicom-login-result-title">
+      <div class="unicom-login-result-header">
+        <div>
+          <p class="unicom-login-kicker">敏感结果</p>
+          <h2 id="unicom-login-result-title">登录凭据</h2>
+        </div>
+        <div class="unicom-login-result-actions">
+          <button id="unicom-copy-package" class="unicom-login-icon-button" type="button" title="复制完整 JSON" aria-label="复制完整 JSON">复制 JSON</button>
+          <button id="unicom-clear-result" class="unicom-login-icon-button unicom-login-danger" type="button" title="清除所有敏感数据" aria-label="清除所有敏感数据">清除</button>
+        </div>
+      </div>
+      <p class="unicom-login-result-warning">将此 JSON 视作密码。请只复制到你自己的安全配置中，不要粘贴到聊天、Issue 或公共页面。</p>
+      <div id="unicom-credential-rows" class="unicom-credential-rows"></div>
+    </section>
+  </section>
+
+  <div class="unicom-login-article-content">
+    {{ page.content | safe }}
+  </div>
+</article>
+{% endblock content %}

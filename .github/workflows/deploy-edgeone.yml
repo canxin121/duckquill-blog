@@ -33,7 +33,9 @@ jobs:
       - name: Build static site
         env:
           SITE_URL: ${{ vars.SITE_URL }}
-        run: zola build --base-url "$SITE_URL"
+        run: |
+          zola build --base-url "$SITE_URL"
+          cp -R edge-functions public/edge-functions
 
       - name: Deploy to EdgeOne Pages
         uses: TencentEdgeOne/edgeone-pages-action@v1
