@@ -3,28 +3,20 @@
 {% block content %}
 <article class="unicom-login-page">
   <header class="unicom-login-heading">
-    <p class="unicom-login-eyebrow">小工具 · EdgeOne Pages Functions</p>
     <h1>{{ page.title }}</h1>
-    <p>{{ page.description }}</p>
   </header>
 
   <section id="unicom-login-app" class="unicom-login-app" data-api-base="/api/unicom" aria-labelledby="unicom-login-app-title">
     <div class="unicom-login-app-header">
       <div>
-        <p class="unicom-login-kicker">一次性短信登录</p>
+        <p class="unicom-login-kicker">应用</p>
         <h2 id="unicom-login-app-title">中国联通短信登录</h2>
       </div>
-      <span class="unicom-login-badge">无持久化</span>
+      <span class="unicom-login-badge">一次性登录</span>
     </div>
 
     <p class="unicom-login-notice">
-      仅限账号本人使用。手机号、短信验证码和登录凭据只保留在当前浏览器内存中；刷新、关闭页面或点击清除后即会丢弃。
-    </p>
-
-    <div class="unicom-login-field">
-      <label for="unicom-access-key">访问口令</label>
-      <input id="unicom-access-key" type="password" autocomplete="off" spellcheck="false" placeholder="由站点管理员单独提供">
-      <p class="unicom-login-hint">口令由 EdgeOne 环境变量校验，不会保存到浏览器存储。</p>
+      仅用于账号本人。登录结果会在离开页面或点击清除后自动丢弃。
     </div>
 
     <div class="unicom-login-field">
@@ -58,9 +50,5 @@
       <div id="unicom-credential-rows" class="unicom-credential-rows"></div>
     </section>
   </section>
-
-  <div class="unicom-login-article-content">
-    {{ page.content | safe }}
-  </div>
 </article>
 {% endblock content %}

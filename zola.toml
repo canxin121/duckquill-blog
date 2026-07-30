@@ -116,6 +116,7 @@ show_theme_switcher = true
 show_repo = true
 links = [
   { url = "@/blog/_index.md", name = "Blog" },
+  { url = "@/apps/unicom-login/index.md", name = "应用" },
   { url = "@/friends/_index.md", name = "Friends" }
 ]
 

@@ -34,9 +34,6 @@ export default async function onRequest(context) {
 			return error(405, "只支持 POST 请求。", { Allow: "POST" });
 		}
 
-		const authorizationError = await requireAccessKey(context, request);
-		if (authorizationError) return authorizationError;
-
 		const body = await readRequestJson(request);
 		if (body instanceof Response) return body;
 
@@ -49,19 +46,6 @@ export default async function onRequest(context) {
 		// Do not expose request data or upstream responses from a credential endpoint.
 		return error(502, "登录服务暂时不可用，请稍后重试。");
 	}
-}
-
-async function requireAccessKey(context, request) {
-	const configured = context.env?.UNICOM_LOGIN_ACCESS_KEY;
-	if (typeof configured !== "string" || configured.length < 16) {
-		return error(503, "登录服务尚未完成访问控制配置。");
-	}
-
-	const supplied = request.headers.get("X-Unicom-Access-Key") || "";
-	if (!supplied || !(await secureTextEquals(supplied, configured))) {
-		return error(401, "访问口令无效。");
-	}
-	return null;
 }
 
 async function readRequestJson(request) {
@@ -446,18 +430,6 @@ function bytesToBase64(bytes) {
 	let binary = "";
 	for (let index = 0; index < bytes.length; index += 1) binary += String.fromCharCode(bytes[index]);
 	return btoa(binary);
-}
-
-async function secureTextEquals(left, right) {
-	const [leftDigest, rightDigest] = await Promise.all([
-		crypto.subtle.digest("SHA-256", encoder.encode(left)),
-		crypto.subtle.digest("SHA-256", encoder.encode(right)),
-	]);
-	const leftBytes = new Uint8Array(leftDigest);
-	const rightBytes = new Uint8Array(rightDigest);
-	let different = 0;
-	for (let index = 0; index < leftBytes.length; index += 1) different |= leftBytes[index] ^ rightBytes[index];
-	return different === 0;
 }
 
 async function enforceRateLimit(kind, mobile, limit) {

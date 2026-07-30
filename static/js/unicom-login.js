@@ -11,7 +11,6 @@
 	const apiBase = app.dataset.apiBase || "/api/unicom";
 	const byId = (id) => document.getElementById(id);
 	const fields = {
-		accessKey: byId("unicom-access-key"),
 		mobile: byId("unicom-mobile"),
 		smsCode: byId("unicom-sms-code"),
 		send: byId("unicom-send-code"),
@@ -56,21 +55,13 @@
 		if (label) button.textContent = label;
 	}
 
-	function accessKey() {
-		return fields.accessKey.value.trim();
-	}
-
 	async function postJson(path, value) {
-		const key = accessKey();
-		if (!key) throw new Error("请输入站点管理员提供的访问口令。");
-
 		const response = await fetch(`${apiBase}${path}`, {
 			method: "POST",
 			credentials: "omit",
 			cache: "no-store",
 			headers: {
 				"Content-Type": "application/json",
-				"X-Unicom-Access-Key": key,
 			},
 			body: JSON.stringify(value),
 		});
@@ -302,7 +293,6 @@
 		lastCredentials = null;
 		window.clearInterval(cooldownTimer);
 		cooldownTimer = null;
-		fields.accessKey.value = "";
 		fields.mobile.value = "";
 		fields.smsCode.value = "";
 		fields.send.disabled = false;
