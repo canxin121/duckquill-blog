@@ -1,0 +1,43 @@
+name: Deploy to EdgeOne Pages
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A newer push supersedes an older build. This prevents an older deployment
+# from finishing after a newer one and publishing stale content.
+concurrency:
+  group: edgeone-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository and theme
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Zola
+        uses: taiki-e/install-action@v2
+        with:
+          tool: zola
+
+      - name: Build static site
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: zola build --base-url "$SITE_URL"
+
+      - name: Deploy to EdgeOne Pages
+        uses: TencentEdgeOne/edgeone-pages-action@v1
+        with:
+          token: ${{ secrets.EDGEONE_API_TOKEN }}
+          project-name: canxin-blog
+          build-path: ./public
