@@ -147,7 +147,8 @@ main:has(.tsinghua-benefits-page) {
 }
 
 .tsinghua-benefits-sort label,
-.tsinghua-benefits-filter-label {
+.tsinghua-benefits-filter-label,
+.tsinghua-benefits-filter-overall-label {
 	color: var(--fg-muted-4);
 	font-size: var(--font-size-x-small);
 	font-weight: 700;
@@ -157,6 +158,60 @@ main:has(.tsinghua-benefits-page) {
 	padding: 0.55rem 0.65rem;
 	width: 100%;
 	min-height: 2.35rem;
+}
+
+.tsinghua-benefits-filter-overall,
+.tsinghua-benefits-filter-block-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem;
+}
+
+.tsinghua-benefits-filter-overall {
+	margin-bottom: 0.8rem;
+	border: 0.0625rem solid var(--fg-muted-2);
+	border-radius: var(--rounded-corner-small);
+	background: var(--fg-muted-1);
+	box-shadow: var(--edge-highlight);
+	padding: 0.5rem 0.6rem;
+}
+
+.tsinghua-benefits-filter-shortcuts {
+	display: flex;
+	flex: 0 0 auto;
+	align-items: center;
+	gap: 0.25rem;
+}
+
+.tsinghua-benefits-filter-shortcut {
+	appearance: none;
+	border: 0.0625rem solid var(--fg-muted-2);
+	border-radius: 999px;
+	background: var(--glass-bg);
+	box-shadow: var(--edge-highlight);
+	padding: 0.2rem 0.45rem;
+	color: var(--accent-color);
+	font: inherit;
+	font-size: var(--font-size-x-small);
+	font-weight: 700;
+	line-height: 1.35;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.tsinghua-benefits-filter-shortcut:hover:not(:disabled) {
+	border-color: var(--accent-color);
+	background: var(--accent-color-alpha);
+}
+
+.tsinghua-benefits-filter-shortcut:active:not(:disabled) {
+	transform: var(--active);
+}
+
+.tsinghua-benefits-filter-shortcut:disabled {
+	opacity: 0.42;
+	cursor: default;
 }
 
 .tsinghua-benefits-check-row input {
@@ -175,7 +230,16 @@ main:has(.tsinghua-benefits-page) {
 }
 
 .tsinghua-benefits-filter-label {
-	display: block;
+	min-width: 0;
+}
+
+.tsinghua-benefits-filter-label small {
+	color: var(--fg-muted-4);
+	font-size: inherit;
+	font-weight: 500;
+}
+
+.tsinghua-benefits-filter-block-head {
 	margin-bottom: 0.55rem;
 }
 

@@ -29,12 +29,20 @@
 		acquisition: ["自动获得", "认证即领", "直接使用", "学生价/付费", "预约/报名", "申请审核", "项目报名", "项目申请", "岗位/持续参与", "奖学金/评定", "竞赛/评奖", "动态待开放"],
 		effort: ["极低", "低", "中", "高", "竞争性"],
 	};
+	const filterDefinitions = [
+		{ title: "适用范围", field: "scope" },
+		{ title: "获取方式", field: "acquisition" },
+		{ title: "投入门槛", field: "effort" },
+		{ title: "当前状态", field: "status" },
+		{ title: "分类", field: "category" },
+	];
+	const filterFields = filterDefinitions.map(({ field }) => field);
 	let items = [];
 	let lastFocusedElement = null;
 	let toastTimer = null;
 	const state = {
 		query: "",
-		scopes: new Set(),
+		scope: new Set(),
 		acquisition: new Set(),
 		effort: new Set(),
 		status: new Set(),
@@ -80,13 +88,21 @@
 
 	function filterBlock(title, field, values) {
 		if (!values.length) return "";
+		const selected = setForField(field);
 		return [
-			'<section class="tsinghua-benefits-filter-block">',
-			'<span class="tsinghua-benefits-filter-label">', escapeHtml(title), "</span>",
+			'<section class="tsinghua-benefits-filter-block" data-filter-section="', escapeHtml(field), '">',
+			'<div class="tsinghua-benefits-filter-block-head">',
+			'<span class="tsinghua-benefits-filter-label">', escapeHtml(title),
+			' <small data-filter-summary="', escapeHtml(field), '">', selected.size, "/", values.length, "</small></span>",
+			'<div class="tsinghua-benefits-filter-shortcuts" role="group" aria-label="', escapeHtml(title), '快捷选择">',
+			'<button class="tsinghua-benefits-filter-shortcut" type="button" data-filter-command data-filter-field="', escapeHtml(field), '" data-filter-mode="all">全选</button>',
+			'<button class="tsinghua-benefits-filter-shortcut" type="button" data-filter-command data-filter-field="', escapeHtml(field), '" data-filter-mode="none">全不选</button>',
+			"</div>",
+			"</div>",
 			'<div class="tsinghua-benefits-check-list">',
 			values.map((value) => [
 				'<label class="tsinghua-benefits-check-row">',
-				'<input type="checkbox" data-filter="', escapeHtml(field), '" value="', escapeHtml(value), '">',
+				'<input type="checkbox" data-filter="', escapeHtml(field), '" value="', escapeHtml(value), '"', selected.has(value) ? " checked" : "", ">",
 				"<span>", escapeHtml(value), "</span>",
 				"<em>", countBy(field, value), "</em>",
 				"</label>",
@@ -97,17 +113,58 @@
 	}
 
 	function renderFilters() {
-		nodes.filters.innerHTML = [
-			filterBlock("适用范围", "scope", orderedValues("scope")),
-			filterBlock("获取方式", "acquisition", orderedValues("acquisition")),
-			filterBlock("投入门槛", "effort", orderedValues("effort")),
-			filterBlock("当前状态", "status", orderedValues("status")),
-			filterBlock("分类", "category", orderedValues("category")),
-		].join("");
+		nodes.filters.innerHTML = filterDefinitions.map(({ title, field }) => (
+			filterBlock(title, field, orderedValues(field))
+		)).join("");
+		syncFilterControls();
 	}
 
 	function setForField(field) {
-		return state[field];
+		return filterFields.includes(field) ? state[field] : null;
+	}
+
+	function setFieldSelection(field, shouldSelect) {
+		const selected = setForField(field);
+		if (!selected) return;
+		selected.clear();
+		if (shouldSelect) {
+			orderedValues(field).forEach((value) => selected.add(value));
+		}
+	}
+
+	function setAllFilterSelections(shouldSelect) {
+		filterFields.forEach((field) => setFieldSelection(field, shouldSelect));
+	}
+
+	function syncFilterControls() {
+		nodes.filters.querySelectorAll("[data-filter]").forEach((input) => {
+			const selected = setForField(input.dataset.filter);
+			input.checked = Boolean(selected && selected.has(input.value));
+		});
+
+		nodes.filters.querySelectorAll("[data-filter-summary]").forEach((summary) => {
+			const field = summary.dataset.filterSummary;
+			const selected = setForField(field);
+			summary.textContent = selected.size + "/" + orderedValues(field).length;
+		});
+
+		app.querySelectorAll("[data-filter-command]").forEach((button) => {
+			const fields = button.dataset.filterField === "all"
+				? filterFields
+				: [button.dataset.filterField];
+			const selectedCount = fields.reduce((total, field) => total + setForField(field).size, 0);
+			const optionCount = fields.reduce((total, field) => total + orderedValues(field).length, 0);
+			button.disabled = button.dataset.filterMode === "all"
+				? selectedCount === optionCount
+				: selectedCount === 0;
+		});
+	}
+
+	function applyFilterSelection(field, shouldSelect) {
+		if (field === "all") setAllFilterSelections(shouldSelect);
+		else setFieldSelection(field, shouldSelect);
+		syncFilterControls();
+		render();
 	}
 
 	function itemKey(item) {
@@ -164,11 +221,11 @@
 	function filteredItems() {
 		const result = items.filter((item) => {
 			if (!matchesQuery(item)) return false;
-			if (state.scopes.size && !state.scopes.has(item.scope)) return false;
-			if (state.acquisition.size && !state.acquisition.has(item.acquisition)) return false;
-			if (state.effort.size && !state.effort.has(item.effort)) return false;
-			if (state.status.size && !state.status.has(item.status)) return false;
-			if (state.category.size && !state.category.has(item.category)) return false;
+			if (!state.scope.has(item.scope)) return false;
+			if (!state.acquisition.has(item.acquisition)) return false;
+			if (!state.effort.has(item.effort)) return false;
+			if (!state.status.has(item.status)) return false;
+			if (!state.category.has(item.category)) return false;
 			return true;
 		});
 
@@ -384,18 +441,12 @@
 
 	function resetFilters() {
 		state.query = "";
-		state.scopes.clear();
-		state.acquisition.clear();
-		state.effort.clear();
-		state.status.clear();
-		state.category.clear();
+		setAllFilterSelections(true);
 		state.sort = "default";
 		nodes.search.value = "";
 		nodes.mobileSearch.value = "";
 		nodes.sort.value = "default";
-		nodes.filters.querySelectorAll("[data-filter]").forEach((input) => {
-			input.checked = false;
-		});
+		syncFilterControls();
 		render();
 		showToast("筛选条件已重置");
 	}
@@ -419,6 +470,7 @@
 			const payload = await response.json();
 			if (!Array.isArray(payload)) throw new Error("invalid data");
 			items = payload;
+			setAllFilterSelections(true);
 			renderFilters();
 			render();
 		} catch (_error) {
@@ -454,8 +506,15 @@
 			const selected = setForField(target.dataset.filter);
 			if (!selected) return;
 			target.checked ? selected.add(target.value) : selected.delete(target.value);
+			syncFilterControls();
 			render();
 		}
+	});
+
+	app.addEventListener("click", (event) => {
+		const command = event.target.closest("[data-filter-command]");
+		if (!command) return;
+		applyFilterSelection(command.dataset.filterField, command.dataset.filterMode === "all");
 	});
 
 	document.addEventListener("click", (event) => {
