@@ -35,8 +35,8 @@ insert_anchor_links = "left"
 
 主要关注 RISC-V 处理器测试与硬件安全，已参与以下研究成果：
 
-- [RISCSmith: Finding RISC-V CPU Bugs via Rich Instruction Construction and On-the-fly Differential Analysis](http://www.wingtecher.com/themes/WingTecherResearch/assets/papers/paper_from_26/RISCSmith.pdf)：DAC 2026，第一作者
-- [DRVFuzz: Data-Sensitive RISC-V CPU Fuzzing](http://www.wingtecher.com/themes/WingTecherResearch/assets/papers/paper_from_26/DRVFuzz.pdf)：Security 2026，作者之一
+- [RISCSmith](http://www.wingtecher.com/themes/WingTecherResearch/assets/papers/paper_from_26/RISCSmith.pdf)：DAC 2026，第一作者
+- [DRVFuzz](http://www.wingtecher.com/themes/WingTecherResearch/assets/papers/paper_from_26/DRVFuzz.pdf)：Security 2026，作者之一
 
 ## 开源项目
 
