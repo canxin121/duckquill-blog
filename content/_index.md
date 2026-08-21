@@ -6,10 +6,10 @@ insert_anchor_links = "left"
 # 关于我
 
 <div class="about-hero">
-  <a class="about-avatar-link" href="https://github.com/canxin121" rel="noopener nofollow noreferrer" target="_blank" aria-label="打开 canxin 的 GitHub 主页">
-    <img class="about-avatar" src="/images/avatar-canxin.png" alt="canxin 头像" width="120" height="120" loading="lazy" />
+  <a class="about-avatar-link" href="https://github.com/canxin121" rel="noopener nofollow noreferrer" target="_blank" aria-label="打开张旭东（canxin）的 GitHub 主页">
+    <img class="about-avatar" src="/images/avatar-canxin.png" alt="张旭东（canxin）的头像" width="120" height="120" loading="lazy" />
   </a>
-  <p><strong>canxin</strong>，本科毕业于西安电子科技大学电院，现为清华大学软院研究生。研究方向为硬件安全，主要关注 RISC-V 处理器的模糊测试、漏洞发现与差分分析，同时持续进行前端、后端、App 与 Rust 的编码实践。</p>
+  <p><strong>张旭东</strong>（canxin），本科毕业于西安电子科技大学电院，现为清华大学软院研究生。研究方向为硬件安全，主要关注 RISC-V 处理器的模糊测试、漏洞发现与差分分析，同时持续进行前端、后端、App 与 Rust 的编码实践。</p>
 </div>
 
 ## 教育背景
