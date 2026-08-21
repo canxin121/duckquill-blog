@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% import "macros/urls.html" as macros_urls %}
+
+{% block content %}
+{% set data_url = macros_urls::host_relative(url=get_url(path="data/tsinghua-student-benefits.json")) %}
+<article class="tsinghua-benefits-page">
+  <section id="tsinghua-benefits-app" class="tsinghua-benefits-app" data-data-url="{{ data_url }}" aria-label="清华学生权益清单">
+    <aside id="tsinghua-benefits-sidebar" class="tsinghua-benefits-sidebar" aria-label="筛选条件">
+      <div class="tsinghua-benefits-sidebar-head">
+        <h2>筛选 <span id="tsinghua-benefits-count" class="tsinghua-benefits-count">0 项</span></h2>
+        <div class="tsinghua-benefits-sidebar-actions">
+          <button id="tsinghua-benefits-reset" class="tsinghua-benefits-reset" type="button">重置</button>
+          <button id="tsinghua-benefits-done" class="tsinghua-benefits-done" type="button">完成</button>
+        </div>
+      </div>
+
+      <label class="tsinghua-benefits-search" for="tsinghua-benefits-search-input">
+        <span class="tsinghua-benefits-search-icon" aria-hidden="true">⌕</span>
+        <span class="visually-hidden">搜索权益</span>
+        <input id="tsinghua-benefits-search-input" type="search" placeholder="搜索算力、软件、VPN、住宿…" autocomplete="off">
+      </label>
+
+      <div class="tsinghua-benefits-sort">
+        <label for="tsinghua-benefits-sort-select">排序</label>
+        <select id="tsinghua-benefits-sort-select">
+          <option value="default">推荐顺序</option>
+          <option value="easy">最容易获得</option>
+          <option value="rating">评分最高</option>
+          <option value="limited">限时优先</option>
+          <option value="name">名称排序</option>
+        </select>
+      </div>
+
+      <div id="tsinghua-benefits-filters" class="tsinghua-benefits-filters"></div>
+    </aside>
+
+    <div class="tsinghua-benefits-content">
+      <div class="tsinghua-benefits-mobile-toolbar">
+        <button id="tsinghua-benefits-mobile-filter" class="tsinghua-benefits-mobile-filter" type="button" aria-controls="tsinghua-benefits-sidebar" aria-expanded="false">筛选</button>
+        <label class="tsinghua-benefits-mobile-search" for="tsinghua-benefits-mobile-search-input">
+          <span class="tsinghua-benefits-mobile-search-icon" aria-hidden="true">⌕</span>
+          <span class="visually-hidden">搜索权益</span>
+          <input id="tsinghua-benefits-mobile-search-input" type="search" placeholder="搜索权益…" autocomplete="off">
+        </label>
+      </div>
+      <div id="tsinghua-benefits-cards" class="tsinghua-benefits-cards" aria-live="polite" aria-busy="true">
+        <div class="tsinghua-benefits-loading">正在加载权益清单…</div>
+      </div>
+    </div>
+  </section>
+</article>
+
+<div id="tsinghua-benefits-mobile-overlay" class="tsinghua-benefits-mobile-overlay" aria-hidden="true"></div>
+
+<div id="tsinghua-benefits-modal-bg" class="tsinghua-benefits-modal-bg" aria-hidden="true">
+  <article id="tsinghua-benefits-modal" class="tsinghua-benefits-modal" role="dialog" aria-modal="true" aria-labelledby="tsinghua-benefits-modal-title" tabindex="-1"></article>
+</div>
+<div id="tsinghua-benefits-toast" class="tsinghua-benefits-toast" role="status" aria-live="polite"></div>
+{% endblock content %}

@@ -1,6 +1,7 @@
 {% import "macros/urls.html" as macros_urls %}
 
 {%- set rel_attributes = macros_rel_attributes::rel_attributes() | trim -%}
+{%- set active_current_url = current_url | default(value='/') -%}
 
 {%- if config.extra.nav.auto_hide %}
 	<div id="handle"></div>
@@ -34,12 +35,13 @@
 												{{- macros_translate::translate(key=link.name, default=link.name, language_strings=language_strings) -}}
 											</a>
 										</li>
-									{%- else %}
-										<li>
-										<a href="{{ macros_urls::host_relative(url=get_url(path=link.url, lang=lang)) }}"
-												{%- if current_url | default(value='/') | trim_end_matches(pat='/') | safe == get_url(path=link.url, lang=lang) | trim_end_matches(pat='/') | safe -%}
-													class="active"
-												{%- endif -%}>
+					{%- else %}
+						<li>
+						{%- set nested_link_url = get_url(path=link.url, lang=lang) -%}
+						<a href="{{ macros_urls::host_relative(url=nested_link_url) }}"
+								{%- if active_current_url is starting_with(nested_link_url) -%}
+									class="active"
+								{%- endif -%}>
 												{{- macros_translate::translate(key=link.name, default=link.name, language_strings=language_strings) -}}
 											</a>
 										</li>
@@ -56,8 +58,9 @@
 					</li>
 				{%- else %}
 					<li>
-						<a href="{{ macros_urls::host_relative(url=get_url(path=link.url, lang=lang)) }}"
-							{%- if current_url | default(value='/') | trim_end_matches(pat='/') | safe == get_url(path=link.url, lang=lang) | trim_end_matches(pat='/') | safe -%}
+						{%- set nav_link_url = get_url(path=link.url, lang=lang) -%}
+						<a href="{{ macros_urls::host_relative(url=nav_link_url) }}"
+							{%- if active_current_url is starting_with(nav_link_url) -%}
 								class="active"
 							{%- endif -%}>
 							{{- macros_translate::translate(key=link.name, default=link.name, language_strings=language_strings) -}}
