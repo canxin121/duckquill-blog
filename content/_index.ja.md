@@ -35,9 +35,7 @@ insert_anchor_links = "left"
 
 - [app_rhyme](https://github.com/canxin121/app_rhyme): Flutter + Rust のオープンソース音楽アプリ
 - [oxidebot](https://github.com/canxin121/oxidebot): Rust 指向の bot/framework 実践プロジェクト
-- [opencode-studio](https://github.com/canxin121/opencode-studio): 高機能・高性能な OpenCode 向けビジュアルワークスペース
-- [opencode-planpilot](https://github.com/canxin121/opencode-planpilot): `plan -> step -> goal` 構造で計画と自動継続実行を行う OpenCode プラグイン
-- [opencode-workbench](https://github.com/canxin121/opencode-workbench): git worktree ベースの並行タスク編成・ルーティングプラグイン
+- [agena](https://github.com/canxin121/agena): Rust で構築したローカル LLM エージェントランタイム
 
 ## オープンソースへの貢献
 

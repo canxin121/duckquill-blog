@@ -9,7 +9,7 @@ insert_anchor_links = "left"
   <a class="about-avatar-link" href="https://github.com/canxin121" rel="noopener nofollow noreferrer" target="_blank" aria-label="Open canxin's GitHub profile">
     <img class="about-avatar" src="/images/avatar-canxin.png" alt="canxin avatar" width="120" height="120" loading="lazy" />
   </a>
-  <p><strong>canxin</strong> is an undergraduate at Xidian University (School of Electronic Engineering), admitted via recommendation to Tsinghua University (School of Software Engineering) for graduate study, currently in senior-year/incoming-graduate stage. The graduate research direction is hardware security, while continuously practicing coding across frontend, backend, app development, and Rust.</p>
+  <p><strong>canxin</strong> is a graduate student at Tsinghua University (School of Software Engineering), having completed undergraduate studies at Xidian University (School of Electronic Engineering). The research focus is hardware security, particularly RISC-V CPU fuzzing, bug finding, and differential analysis, while continuously practicing coding across frontend, backend, app development, and Rust.</p>
 </div>
 
 ## Education
@@ -31,13 +31,18 @@ insert_anchor_links = "left"
   </ul>
 </div>
 
+## Academic Profile
+
+The main research interests are RISC-V CPU testing and hardware security. Selected research publications include:
+
+- [RISCSmith: Finding RISC-V CPU Bugs via Rich Instruction Construction and On-the-fly Differential Analysis](http://www.wingtecher.com/themes/WingTecherResearch/assets/papers/paper_from_26/RISCSmith.pdf): DAC 2026, first author
+- [DRVFuzz: Data-Sensitive RISC-V CPU Fuzzing](http://www.wingtecher.com/themes/WingTecherResearch/assets/papers/paper_from_26/DRVFuzz.pdf): Security 2026, co-author
+
 ## Open-source Projects
 
 - [app_rhyme](https://github.com/canxin121/app_rhyme): Flutter + Rust open-source music app
 - [oxidebot](https://github.com/canxin121/oxidebot): Rust-oriented bot/framework practice project
-- [opencode-studio](https://github.com/canxin121/opencode-studio): Feature-rich, high-performance visual workspace for OpenCode
-- [opencode-planpilot](https://github.com/canxin121/opencode-planpilot): Structured `plan -> step -> goal` planning and auto-continue plugin for OpenCode
-- [opencode-workbench](https://github.com/canxin121/opencode-workbench): Concurrent task orchestration and routing plugin based on git worktrees
+- [agena](https://github.com/canxin121/agena): A local LLM agent runtime built with Rust
 
 ## Open-source Contributions
 

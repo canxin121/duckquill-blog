@@ -35,9 +35,7 @@ insert_anchor_links = "left"
 
 - [app_rhyme](https://github.com/canxin121/app_rhyme): Flutter + Rust ওপেন-সোর্স মিউজিক অ্যাপ
 - [oxidebot](https://github.com/canxin121/oxidebot): Rust-কেন্দ্রিক বট/ফ্রেমওয়ার্ক অনুশীলন প্রকল্প
-- [opencode-studio](https://github.com/canxin121/opencode-studio): OpenCode-এর জন্য ফিচারসমৃদ্ধ, উচ্চ-দক্ষতার ভিজ্যুয়াল ওয়ার্কস্পেস
-- [opencode-planpilot](https://github.com/canxin121/opencode-planpilot): OpenCode-এর `plan -> step -> goal` কাঠামোর পরিকল্পনা ও auto-continue প্লাগইন
-- [opencode-workbench](https://github.com/canxin121/opencode-workbench): git worktree-ভিত্তিক সমান্তরাল কাজের orchestration ও routing প্লাগইন
+- [agena](https://github.com/canxin121/agena): Rust দিয়ে তৈরি স্থানীয় LLM agent runtime
 
 ## ওপেন-সোর্স অবদান
 
