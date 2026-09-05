@@ -10,6 +10,7 @@ tags = ["ColorOS", "Android", "LSPosed", "景深壁纸", "Root", "开源项目"]
 [extra]
 toc = true
 toc_inline = true
+styles = ["css/coloros-depthmask.css"]
 +++
 
 > 项目地址：[canxin121/ColorOSDepthMask](https://github.com/canxin121/ColorOSDepthMask)
@@ -26,7 +27,12 @@ ColorOS 的锁屏景深功能会识别壁纸中的人物或主体，并将前景
 
 ## 功能概览
 
-{{ image(url="lockscreen-editor.jpg", alt="ColorOS 锁屏编辑页，底部功能栏显示壁纸、样式、景深和新增的蒙版入口", end=true, no_hover=true) }}
+<figure class="depthmask-screenshot">
+  <a href="lockscreen-editor.jpg" data-lightbox="true">
+    <img src="lockscreen-editor.jpg" alt="ColorOS 锁屏编辑页，底部功能栏显示壁纸、样式、景深和新增的蒙版入口" loading="lazy" decoding="async">
+  </a>
+  <figcaption>锁屏编辑页中的「蒙版」入口，与 ColorOS 原生「景深」功能并列。</figcaption>
+</figure>
 
 模块并没有另外做一套独立的壁纸预览，而是直接嵌入 ColorOS 原有锁屏编辑页。截图里可以看到，**蒙版** 与系统自己的 **景深** 功能并列出现，完成蒙版修改后仍然沿用原生的缩放、裁切、时钟和最终应用流程。
 
@@ -44,7 +50,12 @@ ColorOSDepthMask 主要提供以下能力：
 
 ## 三种蒙版来源
 
-{{ image(url="mask-panel.jpg", alt="ColorOSDepthMask 蒙版功能面板，包含自动生成、编辑、导入以及替换、并集、交集、反转和删除蒙版", end=true, no_hover=true) }}
+<figure class="depthmask-screenshot">
+  <a href="mask-panel.jpg" data-lightbox="true">
+    <img src="mask-panel.jpg" alt="ColorOSDepthMask 蒙版功能面板，包含自动生成、编辑、导入以及替换、并集、交集、反转和删除蒙版" loading="lazy" decoding="async">
+  </a>
+  <figcaption>蒙版面板：自动生成、编辑、导入，以及替换 / 并集 / 交集 / 反转。</figcaption>
+</figure>
 
 点击编辑页底部的 **蒙版** 后，会直接打开当前壁纸对应的功能面板。上半部分负责取得或修改蒙版，下半部分负责决定自定义蒙版与 ColorOS 原始结果之间怎样组合；所有操作都绑定到当前壁纸，而不是一个全局蒙版。
 
@@ -58,7 +69,12 @@ ColorOSDepthMask 主要提供以下能力：
 
 ### 在真实壁纸上编辑
 
-{{ image(url="mask-editor.jpg", alt="ColorOSDepthMask 蒙版编辑器，提供画笔、橡皮、笔刷大小、撤销、重做和重置", end=true, no_hover=true) }}
+<figure class="depthmask-screenshot">
+  <a href="mask-editor.jpg" data-lightbox="true">
+    <img src="mask-editor.jpg" alt="ColorOSDepthMask 蒙版编辑器，提供画笔、橡皮、笔刷大小、撤销、重做和重置" loading="lazy" decoding="async">
+  </a>
+  <figcaption>在真实壁纸底图上直接修整蒙版，支持画笔、橡皮、撤销、重做和笔刷大小调整。</figcaption>
+</figure>
 
 已有蒙版可以通过 **编辑** 继续修改；没有现成蒙版时，也可以从空白蒙版开始绘制。
 
