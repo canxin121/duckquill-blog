@@ -37,7 +37,7 @@ insert_anchor_links = "left"
 
 - [RISCSmith](http://www.wingtecher.com/themes/WingTecherResearch/assets/papers/paper_from_26/RISCSmith.pdf)：DAC 2026，第一作者
 - [DRVFuzz](http://www.wingtecher.com/themes/WingTecherResearch/assets/papers/paper_from_26/DRVFuzz.pdf)：Security 2026，作者之一
-- TrapFuzz: Understanding and Detecting Recovery Failure Issues in Multi-Trap Mechanisms of CPUs：ASPLOS’27，第二作者
+- TrapFuzz：ASPLOS’27，第二作者
 
 ## 开源项目
 
