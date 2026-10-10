@@ -37,7 +37,7 @@ The main research interests are RISC-V CPU testing and hardware security. Select
 
 - [RISCSmith](http://www.wingtecher.com/themes/WingTecherResearch/assets/papers/paper_from_26/RISCSmith.pdf): DAC 2026, first author
 - [DRVFuzz](http://www.wingtecher.com/themes/WingTecherResearch/assets/papers/paper_from_26/DRVFuzz.pdf): Security 2026, co-author
-- TrapFuzz: ASPLOS’27, second author
+- [TrapFuzz](http://www.wingtecher.com/themes/WingTecherResearch/assets/papers/paper_from_27/TrapFuzz_ASPLOS2027.pdf): ASPLOS’27, second author
 
 ## Open-source Projects
 
