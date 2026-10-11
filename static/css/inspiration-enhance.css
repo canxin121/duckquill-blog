@@ -1,0 +1,26 @@
+article .inspiration-screenshot {
+    clear: both;
+    width: min(100%, 360px);
+    margin: 1.5rem auto 2rem;
+}
+
+article .inspiration-screenshot a {
+    display: block;
+    width: 100%;
+}
+
+article .inspiration-screenshot img {
+    display: block;
+    float: none;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+}
+
+article .inspiration-screenshot figcaption {
+    margin-top: 0.65rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: center;
+}
